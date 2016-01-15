@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.zxq.iov.cloud</groupId>
+		<artifactId>trace</artifactId>
+		<version>3</version>
+	</parent>
+	<artifactId>trace-app-web</artifactId>
+	<packaging>war</packaging>
+	<properties>
+		<maven.test.skip>false</maven.test.skip>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<dubbo-iface.version>1.0</dubbo-iface.version>
+		<trace-app.version>3</trace-app.version>
+		<spring-amqp.version>1.5.3.RELEASE</spring-amqp.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.test.dubbo.demo.iface</groupId>
+			<artifactId>dubbo-iface</artifactId>
+			<version>${dubbo-iface.version}</version>
+		</dependency>
+		<dependency>
+			<artifactId>app-tbox-service</artifactId>
+			<groupId>com.zxq.iov.cloud.app</groupId>
+			<version>3.0.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<artifactId>gw-tbox-udpserver</artifactId>
+			<groupId>com.zxq.iov.cloud</groupId>
+			<version>3.0.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.zxq.iov.cloud</groupId>
+			<artifactId>trace-app</artifactId>
+			<version>${trace-app.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.amqp</groupId>
+			<artifactId>spring-amqp</artifactId>
+			<version>${spring-amqp.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<finalName>trace-app-web</finalName>
+	</build>
+</project>
