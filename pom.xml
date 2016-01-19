@@ -3,13 +3,11 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>com.zxq.iov.cloud.app</groupId>
-		<artifactId>app</artifactId>
+		<groupId>com.zxq.iov.cloud</groupId>
+		<artifactId>cloud</artifactId>
 		<version>3.0.0-SNAPSHOT</version>
 		<relativePath>../app/pom.xml</relativePath>
 	</parent>
-
-	<groupId>com.zxq.iov.cloud</groupId>
 	<artifactId>trace</artifactId>
 	<version>3</version>
 	<packaging>pom</packaging>
@@ -22,11 +20,6 @@
 		<jdk.version>1.7</jdk.version>
 	</properties>
 	<dependencies>
-		<dependency>
-			<groupId>com.test.dubbo.demo.iface</groupId>
-			<artifactId>dubbo-iface</artifactId>
-			<version>${dubbo-iface.version}</version>
-		</dependency>
 		<dependency>
 			<groupId>com.github.sgroschupf</groupId>
 			<artifactId>zkclient</artifactId>
@@ -55,6 +48,8 @@
 		<module>trace-app</module>
 		<module>trace-app-web</module>
 		<module>trace-api</module>
+		<module>trace-demo</module>
+		<module>trace-tbox</module>
+		<module>trace-mq</module>
 	</modules>
-
 </project>

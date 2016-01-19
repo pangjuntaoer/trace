@@ -17,6 +17,6 @@
 
 	<!-- 生成远程服务代理，可以和本地bean一样使用demoService -->
 	<dubbo:reference id="dubboTestServiceApi"
-		interface="org.dubbo.iface.DubboTestServiceApi" check="false" filter="-trace"
+		interface="org.dubbo.iface.DubboTestServiceApi" check="false" filter="traceDubboConsumerFilter"
 		timeout="2000" />
 </beans>

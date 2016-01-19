@@ -1,0 +1,67 @@
+package com.zxq.iov.cloud.trace.filter.dubbo;
+
+import com.alibaba.dubbo.common.Constants;
+import com.alibaba.dubbo.common.extension.Activate;
+import com.alibaba.dubbo.rpc.Filter;
+import com.alibaba.dubbo.rpc.Invocation;
+import com.alibaba.dubbo.rpc.Invoker;
+import com.alibaba.dubbo.rpc.Result;
+import com.alibaba.dubbo.rpc.RpcException;
+import com.alibaba.dubbo.rpc.RpcInvocation;
+import com.saicmotor.telematics.framework.core.utils.IpUtil;
+import com.zxq.iov.cloud.trace.Annotation;
+import com.zxq.iov.cloud.trace.AnnotationType;
+import com.zxq.iov.cloud.trace.BinaryAnnotation;
+import com.zxq.iov.cloud.trace.Span;
+import com.zxq.iov.cloud.trace.TraceContext;
+import com.zxq.iov.cloud.trace.Tracer;
+
+@Activate(group = { Constants.CONSUMER })
+public class TraceDubboConsumerFilter implements Filter {
+
+	private Tracer tracer = Tracer.getTracer();
+
+	// 调用过程拦截
+	public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
+
+		System.out.println("-------------------dubbo consumer filter-----------------------------");
+		TraceContext context = tracer.getTraceContext();
+		boolean isSample = context.getIsSample();
+
+		Span span = null;
+		if (isSample) {
+			String currentSpanId = tracer.genCurrentSpanId(context.getParentSpanId(), context.getCurrentSpanId());
+			String traceId = context.getTraceId();
+			span = new Span(traceId, currentSpanId);
+			span.setSignature(invoker.getUrl().toFullString());
+			span.addAnnotation(
+					new Annotation(AnnotationType.CS.name(), System.currentTimeMillis(), context.getIp(), null));
+			context.putSpan(span);
+			context.setCurrentSpanId(currentSpanId);
+		}
+		try {
+			RpcInvocation invocation1 = (RpcInvocation) invocation;
+			invocation1.setAttachment("traceId", context.getTraceId());
+			invocation1.setAttachment("isSample", String.valueOf(isSample));
+			invocation1.setAttachment("parentSpanId", context.getCurrentSpanId());
+			System.out.println("traceId: " + context.getTraceId());
+			System.out.println("isSample: " + isSample);
+			System.out.println("parentSpanId: " + context.getCurrentSpanId());
+			Result result = invoker.invoke(invocation);
+			if (isSample && result.getException() != null) {
+				span.addBinaryAnnotation(
+						new BinaryAnnotation("exception", System.currentTimeMillis(), IpUtil.getNetworkIp(), null));
+			}
+			return result;
+		} finally {
+			if (isSample) {
+				span.setSignature(invoker.getUrl().toFullString());
+				span.addAnnotation(new Annotation(AnnotationType.CR.name(), System.currentTimeMillis(),
+						IpUtil.getNetworkIp(), null));
+				tracer.sendSpan(span);
+				System.out.println("-------------------dubbo consumer filter-----------------------------send span");
+			}
+		}
+	}
+
+}

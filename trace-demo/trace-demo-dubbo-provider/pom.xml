@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.zxq.iov.cloud</groupId>
+		<artifactId>trace-demo</artifactId>
+		<version>3</version>
+	</parent>
+	<artifactId>trace-demo-dubbo-provider</artifactId>
+	<name>trace-demo-dubbo-provider</name>
+	<url>http://maven.apache.org</url>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<trace-demo-dubbo-iface.version>3</trace-demo-dubbo-iface.version>
+		<trace-api.version>3</trace-api.version>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>com.zxq.iov.cloud</groupId>
+			<artifactId>trace-demo-dubbo-iface</artifactId>
+			<version>${trace-demo-dubbo-iface.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.zxq.iov.cloud</groupId>
+			<artifactId>trace-api</artifactId>
+			<version>${trace-api.version}</version>
+		</dependency>
+	</dependencies>
+</project>

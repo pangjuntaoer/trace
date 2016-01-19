@@ -5,7 +5,6 @@ import java.util.Map;
 public class Annotation {
 	
 	public Annotation() {
-		
 	}
 	
 	public Annotation(String type, long timestamp, String ip, Map<String, String[]> parasMap) {

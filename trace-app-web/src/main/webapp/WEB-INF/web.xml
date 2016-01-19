@@ -28,7 +28,7 @@
 
 	<filter>
 		<filter-name>TraceFilter</filter-name>
-		<filter-class>com.zxq.iov.cloud.trace.filter.TraceFilter</filter-class>
+		<filter-class>com.zxq.iov.cloud.trace.filter.servlet.TraceFilter</filter-class>
 	</filter>
 
 	<filter-mapping>

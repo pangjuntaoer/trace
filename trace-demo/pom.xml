@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.zxq.iov.cloud</groupId>
+		<artifactId>trace</artifactId>
+		<version>3</version>
+	</parent>
+	<artifactId>trace-demo</artifactId>
+	<packaging>pom</packaging>
+	<properties>
+		<maven.test.skip>false</maven.test.skip>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<dubbo-iface.version>1.0</dubbo-iface.version>
+		<trace-app.version>3</trace-app.version>
+		<spring-amqp.version>1.5.3.RELEASE</spring-amqp.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.amqp</groupId>
+			<artifactId>spring-amqp</artifactId>
+			<version>${spring-amqp.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+		</dependency>
+	</dependencies>
+	<build>
+		<finalName>trace-demo</finalName>
+	</build>
+	<modules>
+		<module>trace-demo-dubbo-iface</module>
+		<module>trace-demo-dubbo-provider</module>
+    <module>trace-demo-app</module>
+  </modules>
+</project>

@@ -6,7 +6,6 @@ import java.util.List;
 public class Span {
 	
 	public Span() {
-		
 	}
 	
 	public Span(String traceId, String spanId) {
