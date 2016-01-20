@@ -8,9 +8,6 @@
         <dependent-module archiveName="trace-api-3.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/trace-api/trace-api">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="trace-app-3.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/trace-app/trace-app">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
         <property name="context-root" value="trace-demo"/>
         <property name="java-output-path" value="/trace-demo/target/classes"/>
     </wb-module>

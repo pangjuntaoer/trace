@@ -25,6 +25,7 @@ public class TraceAppFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
+		System.out.println("----------traceAppFilter start--------------------" + System.currentTimeMillis());
 		Tracer tracer = Tracer.getTracer();
 		boolean isSample = tracer.isSample();
 		String traceId = UUID.randomUUID().toString();
@@ -64,6 +65,7 @@ public class TraceAppFilter implements Filter {
 				tracer.sendSpan(rootSpan);
 			}
 			tracer.removeTraceContext();
+			System.out.println("----------traceAppFilter end--------------------" + System.currentTimeMillis());
 		}
 	}
 

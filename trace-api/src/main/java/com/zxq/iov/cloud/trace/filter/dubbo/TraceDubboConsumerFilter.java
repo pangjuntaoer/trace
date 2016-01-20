@@ -24,7 +24,7 @@ public class TraceDubboConsumerFilter implements Filter {
 	// 调用过程拦截
 	public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
 
-		System.out.println("-------------------dubbo consumer filter-----------------------------");
+		System.out.println("-------------------TraceDubboConsumerFilter start-----------------------------" + System.currentTimeMillis());
 		TraceContext context = tracer.getTraceContext();
 		boolean isSample = context.getIsSample();
 
@@ -59,8 +59,8 @@ public class TraceDubboConsumerFilter implements Filter {
 				span.addAnnotation(new Annotation(AnnotationType.CR.name(), System.currentTimeMillis(),
 						IpUtil.getNetworkIp(), null));
 				tracer.sendSpan(span);
-				System.out.println("-------------------dubbo consumer filter-----------------------------send span");
 			}
+			System.out.println("-------------------TraceDubboConsumerFilter end-----------------------------" + System.currentTimeMillis());
 		}
 	}
 

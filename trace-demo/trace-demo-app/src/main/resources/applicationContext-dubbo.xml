@@ -15,9 +15,12 @@
 
 	<dubbo:registry address="zookeeper://${zookeeper.address}" />
 	
-
 	<!-- 生成远程服务代理，可以和本地bean一样使用demoService -->
-	<dubbo:reference id="helloServiceApi"
+	<dubbo:reference id="helloServiceApi" protocol="dubbo" check="false"
 		interface="com.zxq.iov.cloud.trace.demo.dubbo.iface.HelloServiceApi"
+		filter="traceDubboConsumerFilter" />
+
+	<dubbo:reference id="messageServiceApi" check="false" protocol="dubbo"
+		interface="com.zxq.iov.cloud.trace.demo.mq.iface.MessageServiceApi"
 		filter="traceDubboConsumerFilter" />
 </beans>

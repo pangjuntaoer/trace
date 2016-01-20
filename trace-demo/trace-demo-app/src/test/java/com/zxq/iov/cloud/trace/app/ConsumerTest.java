@@ -3,6 +3,7 @@ package com.zxq.iov.cloud.trace.app;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -11,22 +12,28 @@ import java.util.Map;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.zxq.iov.cloud.trace.dto.OTAMessage;
 
-@ContextConfiguration(locations = { "classpath:applicationContext-test.xml" })
-public class ConsumerTest extends AbstractJUnit4SpringContextTests {
+public class ConsumerTest {
 
 	@Test
-	public void testSongSearch() {
+	public void testSayHello() {
 		String url = "http://localhost:8080/trace-demo-app/hello/aaa";
-		String result = doHttp(url, "GET");
+		String result = doGet(url, "GET");
 		String hello = getJsonToObj(result, "data", String.class);
 		Assert.assertNotNull(result, hello);
+	}
+	
+	@Test
+	public void testSend() throws IOException {
+		String url = "http://localhost:8080/trace-demo-app/message/send";
+		String result = doPost(url, "POST");
+//		String hello = getJsonToObj(result, "data", String.class);
+		Assert.assertNull(result, null);
 	}
 
 	private static ObjectMapper mapper = new ObjectMapper();
@@ -49,8 +56,32 @@ public class ConsumerTest extends AbstractJUnit4SpringContextTests {
 		}
 		return null;
 	}
+	
+	private String doPost(String urlAddress, String method) throws IOException {
+        URL url = new URL(urlAddress);
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod(method);// 提交模式
+        // conn.setConnectTimeout(10000);//连接超时 单位毫秒
+        // conn.setReadTimeout(2000);//读取超时 单位毫秒
+        conn.setDoOutput(true);// 是否输入参数
 
-	private String doHttp(String urlAddress, String method) {
+        OTAMessage message = new OTAMessage();
+        message.setAckMessageCounter(1);
+        message.setAckRequired(true);
+        message.setAid("aid");
+        message.setAppData("appData".getBytes());
+        
+        String para = mapper.writeValueAsString(message);
+//        System.out.println(para);
+        OutputStream outStream = conn.getOutputStream();
+        outStream.write(("message=" + para).getBytes());// 输入参数
+        outStream.flush();
+        outStream.close();
+        System.out.println(conn.getResponseCode()); //响应代码 200表示成功
+		return null;
+	}
+
+	private String doGet(String urlAddress, String method) {
 		URL url;
 		HttpURLConnection con = null;
 		BufferedReader br = null;

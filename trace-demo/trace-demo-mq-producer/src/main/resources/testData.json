@@ -1,0 +1,6 @@
+{
+"type" : "0",
+"transportFlag": "1",
+"sourceIP" : "127.0.0.1",
+"messageKey":"key"
+}

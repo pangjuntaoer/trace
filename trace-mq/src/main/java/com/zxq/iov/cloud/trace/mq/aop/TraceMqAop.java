@@ -18,19 +18,21 @@ import com.zxq.iov.cloud.trace.dto.MsgWrapperDto;
 @Order(0)
 public class TraceMqAop {
 	
-	private static final String PC_AMQP_S_1 = "execution(public* org.springframework.amqp.core.AmqpTemplate.convertAndSend(Object))";
+	private static final String PC_AMQP_S_1 = "execution(public* org..AmqpTemplate.convertAndSend(Object))";
 
-	private static final String PC_AMQP_S_2 = "execution(public* org.springframework.amqp.core.AmqpTemplate.convertAndSend(String, Object))";
+	private static final String PC_AMQP_S_2 = "execution(public* org..AmqpTemplate.convertAndSend(String, Object))";
 
-	
 	@Around(value = PC_AMQP_S_1 + " or " + PC_AMQP_S_2)
 	public Object aroundAmqpSend(ProceedingJoinPoint point) throws Throwable {
-		Object result = null;
+		System.out.println("----------TraceMqAop start--------------------" + System.currentTimeMillis());
 		Object[] args = point.getArgs();
 		Tracer tracer = Tracer.getTracer();
 		TraceContext context = tracer.getTraceContext();
 		Boolean isSample = context.getIsSample();
 		String traceId = context.getTraceId();
+		System.out.println("traceId: " + context.getTraceId());
+		System.out.println("isSample: " + isSample);
+		System.out.println("parentSpanId: " + context.getParentSpanId());
 		Span span = null;
 		if (isSample) {
 			String currentSpanId = tracer.genCurrentSpanId(context.getParentSpanId(), context.getCurrentSpanId());
@@ -48,16 +50,15 @@ public class TraceMqAop {
 			} else {
 				args[1] = new MsgWrapperDto(traceId, isSample, context.getCurrentSpanId(), args[1]);
 			}
-			result = point.proceed(args);
+			return point.proceed(args);
 		} finally {
 			if (isSample) {
 				span.addAnnotation(
 						new Annotation(AnnotationType.CR.name(), System.currentTimeMillis(), context.getIp(), null));
 				tracer.sendSpan(span);
 			}
+			System.out.println("----------TraceMqAop end--------------------" + System.currentTimeMillis());
 		}
-
-		return result;
 	}
 
 }

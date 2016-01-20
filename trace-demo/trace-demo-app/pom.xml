@@ -16,12 +16,22 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<trace-api.version>3</trace-api.version>
 		<trace-demo-dubbo-iface.version>3</trace-demo-dubbo-iface.version>
+		<trace-demo-mq-iface.version>3</trace-demo-mq-iface.version>
 	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>com.zxq.iov.cloud</groupId>
 			<artifactId>trace-demo-dubbo-iface</artifactId>
 			<version>${trace-demo-dubbo-iface.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.zxq.iov.cloud</groupId>
+			<artifactId>trace-demo-mq-iface</artifactId>
+			<version>${trace-demo-mq-iface.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.zxq.iov.cloud</groupId>

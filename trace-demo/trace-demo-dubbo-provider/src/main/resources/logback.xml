@@ -17,7 +17,7 @@
 		</encoder>
 	</appender>
 
-	<logger name="com.saicmotor.telematics" level="INFO">
+	<logger name="com.saicmotor.telematics" level="error">
 		<appender-ref ref="STDOUT" />
 	</logger>
 

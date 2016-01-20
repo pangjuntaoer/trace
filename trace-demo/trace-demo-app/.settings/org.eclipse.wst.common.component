@@ -7,6 +7,9 @@
         <dependent-module archiveName="trace-demo-dubbo-iface-3.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/trace-demo-dubbo-iface/trace-demo-dubbo-iface">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="trace-demo-mq-iface-3.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/trace-demo-mq-iface/trace-demo-mq-iface">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <dependent-module archiveName="trace-api-3.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/trace-api/trace-api">
             <dependency-type>uses</dependency-type>
         </dependent-module>

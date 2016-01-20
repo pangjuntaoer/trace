@@ -25,17 +25,21 @@ public class KafkaProducer {
 	private KafkaProducer() {
 		Properties props = new Properties();
 
-		try (InputStream is = KafkaProducer.class.getResourceAsStream("/kafka-config.properties")) {
+		try (InputStream is = KafkaProducer.class.getResourceAsStream("/kafka-producer-config.properties")) {
 			props.load(is);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		topic = props.getProperty("topic");
-		props.setProperty("metadata.broker.list", props.getProperty("metadata_broker_list"));
-		props.setProperty("serializer.class", props.getProperty("serializer_class"));
-		props.setProperty("key.serializer.class", props.getProperty("key_serializer_class"));
-		props.setProperty("request.required.acks", props.getProperty("request_required_acks"));
-		producer = new Producer<String, String>(new ProducerConfig(props));
+		
+		Properties properties = new Properties();
+		
+		properties.setProperty("metadata.broker.list", props.getProperty("metadata_broker_list"));
+		properties.setProperty("serializer.class", props.getProperty("serializer_class"));
+		properties.setProperty("key.serializer.class", props.getProperty("key_serializer_class"));
+		properties.setProperty("request.required.acks", props.getProperty("request_required_acks"));
+		
+		producer = new Producer<String, String>(new ProducerConfig(properties));
 	}
 
 	public void send(Span span) throws JsonProcessingException {
