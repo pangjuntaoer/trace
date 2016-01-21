@@ -13,7 +13,7 @@
         <dependent-module archiveName="trace-mq-3.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/trace-mq/trace-mq">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <property name="context-root" value="trace-demo"/>
+        <property name="context-root" value="trace-demo-mq-producer"/>
         <property name="java-output-path" value="/trace-demo-mq-producer/target/classes"/>
     </wb-module>
 </project-modules>

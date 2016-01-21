@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+
+	<property resource="logback.properties" />
+
+	<timestamp key="byDay" datePattern="yyyyMMdd" />
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<!-- encoders are assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>debug</level>
+		</filter>
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+			<charset class="java.nio.charset.Charset">GBK</charset>
+		</encoder>
+	</appender>
+
+	<root level="debug">
+		<appender-ref ref="STDOUT" />
+	</root>
+
+</configuration>

@@ -9,10 +9,10 @@ public class MessageServiceApiImpl implements MessageServiceApi {
 
 	@Autowired
 	private AmqpTemplate amqpTemplate;
-	
+
 	@Override
 	public void send(Object message) {
-		amqpTemplate.convertAndSend("foo.bar", message);
+		amqpTemplate.convertAndSend(message);
 	}
 
 }

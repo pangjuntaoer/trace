@@ -14,19 +14,11 @@ http://www.springframework.org/schema/rabbit http://www.springframework.org/sche
 		</property>
 	</bean>
 
-	<bean id="connectionFactory"
-		class="org.springframework.amqp.rabbit.connection.CachingConnectionFactory">
-		<property name="channelCacheSize" value="${rabbitmq.channelCacheSize}" />
-		<property name="username" value="${rabbitmq.username}" />
-		<property name="password" value="${rabbitmq.password}" />
-		<property name="addresses" value="${hostsAndPorts}" />
-		<property name="virtualHost" value="${rabbitmq.virtualHost}" />
-	</bean>
+	<rabbit:connection-factory id="rabbitConnectionFactory"
+		addresses="${hostsAndPorts}" virtual-host="${rabbitmq.virtualHost}"
+		username="${rabbitmq.username}" password="${rabbitmq.password}" />
 
-	<rabbit:template id="amqpTemplate" connection-factory="connectionFactory"
-		exchange="myExchange" routing-key="foo.bar" message-converter="dtoMessageConvertor" />
-
-	<rabbit:admin connection-factory="connectionFactory" />
+	<rabbit:admin connection-factory="rabbitConnectionFactory" />
 
 	<rabbit:queue name="myQueue" />
 	<!--路由设置 将队列绑定，属于topic类型 -->
@@ -35,5 +27,8 @@ http://www.springframework.org/schema/rabbit http://www.springframework.org/sche
 			<rabbit:binding queue="myQueue" pattern="foo.*" />
 		</rabbit:bindings>
 	</rabbit:topic-exchange>
+
+	<rabbit:template id="amqpTemplate" connection-factory="rabbitConnectionFactory"
+		exchange="myExchange" routing-key="foo.bar" message-converter="dtoMessageConvertor" />
 
 </beans>

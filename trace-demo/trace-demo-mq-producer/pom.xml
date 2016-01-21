@@ -9,7 +9,8 @@
 		<version>3</version>
 	</parent>
 	<artifactId>trace-demo-mq-producer</artifactId>
-	<name>trace-demo-mq-producer</name>
+	<packaging>war</packaging>
+	<name>trace-demo-mq-producer Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -36,4 +37,7 @@
 			<artifactId>spring-webmvc</artifactId>
 		</dependency>
 	</dependencies>
+	<build>
+		<finalName>trace-demo-mq-producer</finalName>
+	</build>
 </project>

@@ -4,7 +4,6 @@
 	xsi:schemaLocation="
     http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
-
 	<!-- 提供方应用信息，用于计算依赖关系 -->
 	<dubbo:application name="${application.name}" />
 
@@ -22,4 +21,5 @@
 	<!-- 和本地bean一样实现服务 -->
 	<bean id="messageServiceApi"
 		class="com.zxq.iov.cloud.trace.demo.mq.producer.MessageServiceApiImpl" />
+
 </beans>

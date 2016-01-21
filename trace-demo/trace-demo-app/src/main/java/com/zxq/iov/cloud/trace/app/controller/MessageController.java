@@ -18,6 +18,10 @@ import com.zxq.iov.cloud.trace.dto.OTAMessage;
 @Controller
 @RequestMapping("/message")
 public class MessageController {
+	
+	public MessageController() {
+		System.out.println("aaaaaaa");
+	}
 
 	@Autowired
 	MessageServiceApi messageServiceApi;
