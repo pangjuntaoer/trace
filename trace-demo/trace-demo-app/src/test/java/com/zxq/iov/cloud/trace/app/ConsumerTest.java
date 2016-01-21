@@ -22,7 +22,8 @@ public class ConsumerTest {
 
 	@Test
 	public void testSayHello() {
-		String url = "http://localhost:8080/trace-demo-app/hello/aaa";
+//		String url = "http://localhost:8080/trace-demo-app/hello/aaa";
+		String url = "http://10.25.23.102:8080/trace-demo-app/hello/aaa";
 		String result = doGet(url, "GET");
 		String hello = getJsonToObj(result, "data", String.class);
 		Assert.assertNotNull(result, hello);
@@ -78,7 +79,7 @@ public class ConsumerTest {
         outStream.write(("message=" + para).getBytes());// 输入参数
         outStream.flush();
         outStream.close();
-        System.out.println(conn.getResponseCode()); //响应代码 200表示成功
+        System.out.println("post::::: " + conn.getResponseCode()); //响应代码 200表示成功
 		return null;
 	}
 

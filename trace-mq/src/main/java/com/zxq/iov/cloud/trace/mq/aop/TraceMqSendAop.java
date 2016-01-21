@@ -16,7 +16,7 @@ import com.zxq.iov.cloud.trace.dto.MsgWrapperDto;
 @Component
 @Aspect
 @Order(0)
-public class TraceMqAop {
+public class TraceMqSendAop {
 	
 	private static final String PC_AMQP_S_1 = "execution(public* org..AmqpTemplate.convertAndSend(Object))";
 
