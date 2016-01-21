@@ -20,13 +20,13 @@ import com.zxq.iov.cloud.trace.dto.OTAMessage;
 
 public class ConsumerTest {
 
-//	@Test
-//	public void testSayHello() {
-//		String url = "http://localhost:8080/trace-demo-app/hello/aaa";
-//		String result = doGet(url, "GET");
-//		String hello = getJsonToObj(result, "data", String.class);
-//		Assert.assertNotNull(result, hello);
-//	}
+	@Test
+	public void testSayHello() {
+		String url = "http://localhost:8080/trace-demo-app/hello/aaa";
+		String result = doGet(url, "GET");
+		String hello = getJsonToObj(result, "data", String.class);
+		Assert.assertNotNull(result, hello);
+	}
 	
 	@Test
 	public void testSend() throws IOException {

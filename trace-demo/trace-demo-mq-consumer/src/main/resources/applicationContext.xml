@@ -3,13 +3,12 @@
 	xmlns:task="http://www.springframework.org/schema/task" xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:rabbit="http://www.springframework.org/schema/rabbit"
 	xsi:schemaLocation="
-http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
-http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit-1.5.xsd
-http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.2.xsd
-http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit-1.3.xsd
+http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.2.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 
-	<!-- 自动扫描包，可以写多个 -->
-	<context:component-scan base-package="com.test" />
+	<context:component-scan base-package="com.zxq.iov.cloud.trace" />
 
 	<!--加载配置文件 -->
 	<bean id="configproperties" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -31,12 +30,12 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 
 	<rabbit:admin connection-factory="connectionFactory" />
 
-	<rabbit:queue name="myQueue" />
+	<rabbit:queue name="traceInQueue" />
 
 	<!-- 监听类设置 -->
 	<rabbit:listener-container connection-factory="connectionFactory">
-		<rabbit:listener ref="consumer" method="onMessage" queue-names="myQueue" />
+		<rabbit:listener ref="consumer" method="onMessage" queue-names="traceInQueue" />
 	</rabbit:listener-container>
 
-	<bean id="consumer" class="com.test.rabbit.Consumer" />
+	<bean id="consumer" class="com.zxq.iov.cloud.trace.demo.mq.consumer.Consumer" />
 </beans>

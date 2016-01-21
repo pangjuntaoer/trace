@@ -20,15 +20,15 @@ http://www.springframework.org/schema/rabbit http://www.springframework.org/sche
 
 	<rabbit:admin connection-factory="rabbitConnectionFactory" />
 
-	<rabbit:queue name="myQueue" />
+	<rabbit:queue name="traceInQueue" />
 	<!--路由设置 将队列绑定，属于topic类型 -->
-	<rabbit:topic-exchange name="myExchange">
+	<rabbit:topic-exchange name="traceExchange">
 		<rabbit:bindings>
-			<rabbit:binding queue="myQueue" pattern="foo.*" />
+			<rabbit:binding queue="traceInQueue" pattern="trace.in.*" />
 		</rabbit:bindings>
 	</rabbit:topic-exchange>
 
 	<rabbit:template id="amqpTemplate" connection-factory="rabbitConnectionFactory"
-		exchange="myExchange" routing-key="foo.bar" message-converter="dtoMessageConvertor" />
+		exchange="traceExchange" routing-key="trace.in.mq" message-converter="dtoMessageConvertor" />
 
 </beans>
