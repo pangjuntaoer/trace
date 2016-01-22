@@ -49,14 +49,14 @@ public class TraceDubboConsumerFilter implements Filter {
 			Result result = invoker.invoke(invocation);
 			if (isSample && result.getException() != null) {
 				span.addBinaryAnnotation(
-						new BinaryAnnotation("exception", System.currentTimeMillis(), IpUtil.getNetworkIp(), null));
+						new BinaryAnnotation("exception", System.currentTimeMillis(), context.getIp(), null));
 			}
 			return result;
 		} finally {
 			if (isSample) {
 				span.setSignature(invoker.getUrl().toFullString());
 				span.addAnnotation(new Annotation(AnnotationType.CR.name(), System.currentTimeMillis(),
-						IpUtil.getNetworkIp(), null));
+						context.getIp(), null));
 				tracer.sendSpan(span);
 			}
 			System.out.println("-------------------TraceDubboConsumerFilter end-----------------------------" + System.currentTimeMillis());

@@ -33,35 +33,34 @@ public class TraceAppFilter implements Filter {
 
 		HttpServletRequest req = (HttpServletRequest) request;
 		String url = req.getRequestURL().toString();
-		TraceContext tc = tracer.getTraceContext();
-		if (tc == null) {
-			tc = new TraceContext();
-			tc.setTraceId(traceId);
-			tc.setIsSample(isSample);
-			tc.setParentSpanId(parentSpanId);
-			tracer.setTraceContext(tc);
+		TraceContext context = tracer.getTraceContext();
+		if (context == null) {
+			context = new TraceContext();
+			context.setTraceId(traceId);
+			context.setIsSample(isSample);
+			context.setParentSpanId(parentSpanId);
+			context.setIp(IpUtil.getNetworkIp());
+			tracer.setTraceContext(context);
 		}
-		Span rootSpan = null;
-		String ip = null;
+		Span span = null;
 		Map<String, String[]> parasMap = null;
 		if (isSample) {
-			ip = request.getLocalAddr();
-			tc.setIp(ip);
 
 			parasMap = new HashMap<String, String[]>();
 			parasMap.putAll(request.getParameterMap());
 			parasMap.put("url", new String[] { url });
 
-			rootSpan = new Span(traceId, parentSpanId);
-			rootSpan.addAnnotation(new Annotation(AnnotationType.SR.name(), System.currentTimeMillis(), IpUtil.getNetworkIp(), parasMap));
+			span = new Span(traceId, tracer.genCurrentSpanId(parentSpanId));
+			span.setSignature(url);
+			span.addAnnotation(new Annotation(AnnotationType.SR.name(), System.currentTimeMillis(), context.getIp(), parasMap));
 		}
 		try {
 			chain.doFilter(request, response);
 		} finally {
 			if (isSample) {
-				rootSpan.addAnnotation(
-						new Annotation(AnnotationType.SS.name(), System.currentTimeMillis(), ip, parasMap));
-				tracer.sendSpan(rootSpan);
+				span.addAnnotation(
+						new Annotation(AnnotationType.SS.name(), System.currentTimeMillis(), context.getIp(), parasMap));
+				tracer.sendSpan(span);
 			}
 			tracer.removeTraceContext();
 			System.out.println("----------traceAppFilter end--------------------" + System.currentTimeMillis());

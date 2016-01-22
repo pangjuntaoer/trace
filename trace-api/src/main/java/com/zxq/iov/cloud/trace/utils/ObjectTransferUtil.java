@@ -21,8 +21,6 @@ public class ObjectTransferUtil {
 				Object[] args = new Object[1];
 				args[0] = value;
 				String classType = descriptor.getPropertyType().toString();
-				System.out.println("propertyName: " + propertyName + ", type: " + descriptor.getPropertyType());
-
 				if ("class [B".equals(classType)) {
 					String aa = (String) value;
 					args[0] = aa == null ? null : aa.getBytes();

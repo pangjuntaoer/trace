@@ -36,7 +36,6 @@ public class TraceMqSendAop {
 		Span span = null;
 		if (isSample) {
 			String currentSpanId = tracer.genCurrentSpanId(context.getParentSpanId());
-
 			span = new Span(traceId, currentSpanId);
 			span.setSignature(point.getSignature().getDeclaringTypeName() + "." + point.getSignature().getName());
 			span.addAnnotation(

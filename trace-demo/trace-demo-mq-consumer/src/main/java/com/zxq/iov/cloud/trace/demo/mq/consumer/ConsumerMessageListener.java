@@ -3,6 +3,8 @@ package com.zxq.iov.cloud.trace.demo.mq.consumer;
 import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zxq.iov.cloud.trace.dto.MsgWrapperDto;
 import com.zxq.iov.cloud.trace.dto.OTAMessage;
 import com.zxq.iov.cloud.trace.utils.ObjectTransferUtil;
@@ -24,8 +26,8 @@ public class ConsumerMessageListener {
     	onMessage(message);
     }
 	
-	private void onMessage(OTAMessage message) {
-		System.out.println(message);
+	private void onMessage(OTAMessage message) throws JsonProcessingException {
+		System.out.println(new ObjectMapper().writeValueAsString(message));
 	}
     
     

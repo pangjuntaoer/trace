@@ -24,8 +24,7 @@ public class TraceDubboProviderFilter implements Filter {
 	// 调用过程拦截
 	public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
 
-		System.out.println("--------------TraceDubboProviderFilter start------------------------"
-				+ System.currentTimeMillis());
+		System.out.println("-----------TraceDubboProviderFilter start--------------" + System.currentTimeMillis());
 		Span span = null;
 		RpcContext rc = RpcContext.getContext();
 
@@ -35,23 +34,24 @@ public class TraceDubboProviderFilter implements Filter {
 		System.out.println("traceId: " + traceId);
 		System.out.println("isSample: " + isSample);
 		System.out.println("parentSpanId: " + parentSpanId);
+		TraceContext context = tracer.getTraceContext();
+		if (context == null) {
+			context = new TraceContext();
+			context.setTraceId(traceId);
+			context.setIsSample(isSample);
+			context.setParentSpanId(parentSpanId);
+			context.setIp(IpUtil.getNetworkIp());
+			tracer.setTraceContext(context);
+		}
+
+		if (isSample) {
+			String currentSpanId = tracer.genCurrentSpanId(parentSpanId);
+			span = new Span(traceId, currentSpanId);
+			span.setSignature(invoker.getUrl().toFullString());
+			span.addAnnotation(
+					new Annotation(AnnotationType.SR.name(), System.currentTimeMillis(), context.getIp(), null));
+		}
 		try {
-			TraceContext tc = tracer.getTraceContext();
-			if (tc == null) {
-				tc = new TraceContext();
-				tc.setTraceId(traceId);
-				tc.setIsSample(isSample);
-				tc.setParentSpanId(parentSpanId);
-				tracer.setTraceContext(tc);
-			}
-
-			if (isSample) {
-				span = new Span(traceId, parentSpanId);
-				span.setSignature(invoker.getUrl().toFullString());
-				span.addAnnotation(new Annotation(AnnotationType.SR.name(), System.currentTimeMillis(),
-						IpUtil.getNetworkIp(), null));
-			}
-
 			Result result = invoker.invoke(invocation);
 			if (isSample && result.getException() != null) {
 				span.addBinaryAnnotation(
@@ -61,13 +61,12 @@ public class TraceDubboProviderFilter implements Filter {
 		} finally {
 			if (isSample) {
 				span.setSignature(invoker.getUrl().toFullString());
-				span.addAnnotation(new Annotation(AnnotationType.SS.name(), System.currentTimeMillis(),
-						IpUtil.getNetworkIp(), null));
+				span.addAnnotation(
+						new Annotation(AnnotationType.SS.name(), System.currentTimeMillis(), context.getIp(), null));
 				tracer.sendSpan(span);
 			}
 			tracer.removeTraceContext();
-			System.out.println(
-					"-------------TraceDubboProviderFilter end-----------------------" + System.currentTimeMillis());
+			System.out.println("----------TraceDubboProviderFilter end-------------" + System.currentTimeMillis());
 		}
 	}
 

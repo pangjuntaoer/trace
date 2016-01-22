@@ -20,14 +20,14 @@ import com.zxq.iov.cloud.trace.dto.OTAMessage;
 
 public class ConsumerTest {
 
-	@Test
-	public void testSayHello() {
-//		String url = "http://localhost:8080/trace-demo-app/hello/aaa";
-		String url = "http://10.25.23.102:8080/trace-demo-app/hello/aaa2";
-		String result = doGet(url, "GET");
-		String hello = getJsonToObj(result, "data", String.class);
-		Assert.assertNotNull(result, hello);
-	}
+//	@Test
+//	public void testSayHello() {
+////		String url = "http://localhost:8080/trace-demo-app/hello/aaa";
+//		String url = "http://10.25.23.102:8080/trace-demo-app/hello/aaa2";
+//		String result = doGet(url, "GET");
+//		String hello = getJsonToObj(result, "data", String.class);
+//		Assert.assertNotNull(result, hello);
+//	}
 	
 	@Test
 	public void testSend() throws IOException {
@@ -35,7 +35,7 @@ public class ConsumerTest {
 		String url = "http://10.25.23.102:8080/trace-demo-app/message/send";
 		String result = doPost(url, "POST");
 //		String hello = getJsonToObj(result, "data", String.class);
-		Assert.assertNull(result, null);
+		Assert.assertNull(result, "success");
 	}
 
 	private static ObjectMapper mapper = new ObjectMapper();
@@ -79,8 +79,13 @@ public class ConsumerTest {
         outStream.write(("message=" + para).getBytes());// 输入参数
         outStream.flush();
         outStream.close();
-        System.out.println("post::::: " + conn.getResponseCode()); //响应代码 200表示成功
-		return null;
+        String input = null;
+        StringBuffer outInfo = new StringBuffer();
+        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));
+		while ((input = br.readLine()) != null) {
+			outInfo.append(input);
+		}
+		return outInfo.toString();
 	}
 
 	private String doGet(String urlAddress, String method) {

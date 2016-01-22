@@ -41,7 +41,7 @@ public class TraceTboxGwAop {
 
 		Span rootSpan = null;
 		if (isSample) {
-			rootSpan = new Span(traceId, parentSpanId);
+			rootSpan = new Span(traceId, tracer.genCurrentSpanId(parentSpanId));
 			rootSpan.setSignature(point.getSignature().getDeclaringTypeName() + "." + point.getSignature().getName());
 			rootSpan.addAnnotation(
 					new Annotation(AnnotationType.SR.name(), System.currentTimeMillis(), context.getIp(), null));

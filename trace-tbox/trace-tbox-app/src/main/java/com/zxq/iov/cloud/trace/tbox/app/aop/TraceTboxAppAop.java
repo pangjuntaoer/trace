@@ -43,7 +43,7 @@ public class TraceTboxAppAop {
 		Span rootSpan = null;
 		Map<String, String[]> parasMap = null;
 		if (isSample) {
-			rootSpan = new Span(context.getTraceId(), dto.getParentSpanId());
+			rootSpan = new Span(context.getTraceId(),tracer.genCurrentSpanId(dto.getParentSpanId()));
 			rootSpan.setSignature(point.getSignature().getDeclaringTypeName() + "." + point.getSignature().getName());
 			rootSpan.addAnnotation(
 					new Annotation(AnnotationType.SR.name(), System.currentTimeMillis(), context.getIp(), parasMap));
