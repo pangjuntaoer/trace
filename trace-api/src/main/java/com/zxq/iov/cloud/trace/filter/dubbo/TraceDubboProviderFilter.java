@@ -42,7 +42,6 @@ public class TraceDubboProviderFilter implements Filter {
 				tc.setTraceId(traceId);
 				tc.setIsSample(isSample);
 				tc.setParentSpanId(parentSpanId);
-				tc.setCurrentSpanId(parentSpanId);
 				tracer.setTraceContext(tc);
 			}
 

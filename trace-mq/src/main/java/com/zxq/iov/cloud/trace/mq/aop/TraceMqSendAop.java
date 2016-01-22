@@ -35,14 +35,13 @@ public class TraceMqSendAop {
 		System.out.println("parentSpanId: " + context.getParentSpanId());
 		Span span = null;
 		if (isSample) {
-			String currentSpanId = tracer.genCurrentSpanId(context.getParentSpanId(), context.getCurrentSpanId());
+			String currentSpanId = tracer.genCurrentSpanId(context.getParentSpanId());
 
 			span = new Span(traceId, currentSpanId);
 			span.setSignature(point.getSignature().getDeclaringTypeName() + "." + point.getSignature().getName());
 			span.addAnnotation(
 					new Annotation(AnnotationType.CS.name(), System.currentTimeMillis(), context.getIp(), null));
 			context.putSpan(span);
-			context.setCurrentSpanId(currentSpanId);
 		}
 		try {
 			if (args != null && args.length == 1) {

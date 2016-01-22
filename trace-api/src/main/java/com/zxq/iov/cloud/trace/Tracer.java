@@ -29,14 +29,19 @@ public class Tracer {
 		}
 	}
 
-	public synchronized String genCurrentSpanId(String parentSpanId, String currentSpanId) {
-		if (currentSpanId == parentSpanId) {
-			return parentSpanId + ".1";
+	public synchronized String genCurrentSpanId(String parentSpanId) {
+		String currentSpanId = getTraceContext().getCurrentSpanId();
+		if (currentSpanId == null) {
+			currentSpanId = parentSpanId;
+		} else if (currentSpanId == parentSpanId) {
+			currentSpanId = parentSpanId + ".1";
 		} else {
 			int len = currentSpanId.length();
 			int id = Integer.parseInt(currentSpanId.substring(currentSpanId.lastIndexOf(".") + 1));
-			return currentSpanId.substring(0, len - 1) + (id + 1);
+			currentSpanId = currentSpanId.substring(0, len - 1) + (id + 1);
 		}
+		getTraceContext().setCurrentSpanId(currentSpanId);
+		return currentSpanId;
 	}
 
 	public synchronized boolean isSample() {

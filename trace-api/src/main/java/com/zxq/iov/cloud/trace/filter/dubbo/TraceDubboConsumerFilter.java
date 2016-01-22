@@ -30,14 +30,13 @@ public class TraceDubboConsumerFilter implements Filter {
 
 		Span span = null;
 		if (isSample) {
-			String currentSpanId = tracer.genCurrentSpanId(context.getParentSpanId(), context.getCurrentSpanId());
+			String currentSpanId = tracer.genCurrentSpanId(context.getParentSpanId());
 			String traceId = context.getTraceId();
 			span = new Span(traceId, currentSpanId);
 			span.setSignature(invoker.getUrl().toFullString());
 			span.addAnnotation(
 					new Annotation(AnnotationType.CS.name(), System.currentTimeMillis(), context.getIp(), null));
 			context.putSpan(span);
-			context.setCurrentSpanId(currentSpanId);
 		}
 		try {
 			RpcInvocation invocation1 = (RpcInvocation) invocation;

@@ -36,7 +36,6 @@ public class TraceTboxGwAop {
 		context.setTraceId(traceId);
 		context.setIsSample(isSample);
 		context.setParentSpanId(parentSpanId);
-		context.setCurrentSpanId(parentSpanId);
 		context.setIp(IpUtil.getNetworkIp());
 		tracer.setTraceContext(context);
 

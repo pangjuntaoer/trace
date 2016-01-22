@@ -12,7 +12,7 @@
 	<version>3</version>
 	<packaging>pom</packaging>
 	<properties>
-	    <maven.test.skip>false</maven.test.skip>
+		<maven.test.skip>false</maven.test.skip>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<javassist.version>3.20.0-GA</javassist.version>
 		<zkclient.version>0.1</zkclient.version>
@@ -49,5 +49,6 @@
 		<module>trace-demo</module>
 		<module>trace-tbox</module>
 		<module>trace-mq</module>
+		<module>trace-redis</module>
 	</modules>
 </project>

@@ -23,7 +23,7 @@ public class ConsumerTest {
 	@Test
 	public void testSayHello() {
 //		String url = "http://localhost:8080/trace-demo-app/hello/aaa";
-		String url = "http://10.25.23.102:8080/trace-demo-app/hello/aaa";
+		String url = "http://10.25.23.102:8080/trace-demo-app/hello/aaa2";
 		String result = doGet(url, "GET");
 		String hello = getJsonToObj(result, "data", String.class);
 		Assert.assertNotNull(result, hello);

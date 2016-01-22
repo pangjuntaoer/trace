@@ -37,7 +37,6 @@ public class TraceTboxAppAop {
 		context.setTraceId(dto.getTraceId());
 		context.setIsSample(isSample);
 		context.setParentSpanId(dto.getParentSpanId());
-		context.setCurrentSpanId(dto.getParentSpanId());
 		context.setIp(IpUtil.getNetworkIp());
 		tracer.setTraceContext(context);
 
