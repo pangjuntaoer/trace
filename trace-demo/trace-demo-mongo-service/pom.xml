@@ -8,40 +8,32 @@
 		<artifactId>trace-demo</artifactId>
 		<version>3</version>
 	</parent>
-	<artifactId>trace-demo-dubbo-provider</artifactId>
+	<artifactId>trace-demo-mongo-service</artifactId>
 	<packaging>war</packaging>
-	<name>trace-demo-dubbo-provider Maven Webapp</name>
+	<name>trace-demo-mongo-service Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<trace-demo-dubbo-iface.version>3</trace-demo-dubbo-iface.version>
+		<trace-demo-mongo-iface.version>3</trace-demo-mongo-iface.version>
 		<trace-api.version>3</trace-api.version>
-		<jedis2.version>2.8.0</jedis2.version>
-		<trace-redis.version>3</trace-redis.version>
 	</properties>
 	<dependencies>
 		<dependency>
-			<groupId>com.zxq.iov.cloud</groupId>
-			<artifactId>trace-demo-dubbo-iface</artifactId>
-			<version>${trace-demo-dubbo-iface.version}</version>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-mongodb</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>redis.clients</groupId>
-			<artifactId>jedis</artifactId>
-			<version>${jedis2.version}</version><!--$NO-MVN-MAN-VER$ -->
+			<groupId>com.zxq.iov.cloud</groupId>
+			<artifactId>trace-demo-mongo-iface</artifactId>
+			<version>${trace-demo-mongo-iface.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.zxq.iov.cloud</groupId>
 			<artifactId>trace-api</artifactId>
 			<version>${trace-api.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>com.zxq.iov.cloud</groupId>
-			<artifactId>trace-redis</artifactId>
-			<version>${trace-redis.version}</version>
-		</dependency>
 	</dependencies>
 	<build>
-		<finalName>trace-demo-dubbo-provider</finalName>
+		<finalName>trace-demo-mongo-service</finalName>
 	</build>
 </project>

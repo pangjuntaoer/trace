@@ -16,13 +16,20 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<trace-api.version>3</trace-api.version>
 		<trace-demo-dubbo-iface.version>3</trace-demo-dubbo-iface.version>
+		<trace-demo-mongo-iface.version>3</trace-demo-mongo-iface.version>
 		<trace-demo-mq-iface.version>3</trace-demo-mq-iface.version>
+		<spring-data-mongodb.version>1.8.2.RELEASE</spring-data-mongodb.version>
 	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>com.zxq.iov.cloud</groupId>
 			<artifactId>trace-demo-dubbo-iface</artifactId>
 			<version>${trace-demo-dubbo-iface.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.zxq.iov.cloud</groupId>
+			<artifactId>trace-demo-mongo-iface</artifactId>
+			<version>${trace-demo-mongo-iface.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>

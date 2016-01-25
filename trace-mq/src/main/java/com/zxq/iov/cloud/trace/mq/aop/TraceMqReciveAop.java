@@ -36,14 +36,14 @@ public class TraceMqReciveAop {
 		TraceContext context = new TraceContext();
 		context.setTraceId(dto.getTraceId());
 		context.setIsSample(isSample);
-		context.setParentSpanId(dto.getParentSpanId());
+		context.setParentSpanId(dto.getParentSpanId() + ".1");
 		context.setIp(IpUtil.getNetworkIp());
 		tracer.setTraceContext(context);
 		
 		Span rootSpan = null;
 		Map<String, String[]> parasMap = null;
 		if (isSample) {
-			rootSpan = new Span(context.getTraceId(), tracer.genCurrentSpanId(dto.getParentSpanId()));
+			rootSpan = new Span(context.getTraceId(), tracer.genCurrentSpanId(context.getParentSpanId()));
 			rootSpan.setSignature(point.getSignature().getDeclaringTypeName() + "." + point.getSignature().getName());
 			rootSpan.addAnnotation(
 					new Annotation(AnnotationType.SR.name(), System.currentTimeMillis(), context.getIp(), parasMap));
