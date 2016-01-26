@@ -23,4 +23,11 @@
 	<bean id="helloServiceApi"
 		class="com.zxq.iov.cloud.trace.demo.dubbo.provider.HelloServiceApiImpl" />
 
+	<dubbo:service
+		interface="com.zxq.iov.cloud.trace.demo.dubbo.iface.EmployeeServiceApi"
+		ref="employeeServiceApi" filter="traceDubboProviderFilter" />
+
+	<bean id="employeeServiceApi"
+		class="com.zxq.iov.cloud.trace.demo.dubbo.provider.EmployeeServiceApiImpl" />
+
 </beans>

@@ -24,11 +24,17 @@
 		<dependency>
 			<groupId>com.saicmotor.telematics.framework.core</groupId>
 			<artifactId>core-dao</artifactId>
+			<exclusions>
+				<exclusion>
+					<artifactId>hibernate-core</artifactId>
+					<groupId>org.hibernate</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>redis.clients</groupId>
 			<artifactId>jedis</artifactId>
-			<version>${jedis2.version}</version><!--$NO-MVN-MAN-VER$-->
+			<version>${jedis2.version}</version><!--$NO-MVN-MAN-VER$ -->
 		</dependency>
 		<dependency>
 			<groupId>org.apache.kafka</groupId>

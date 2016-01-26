@@ -16,6 +16,7 @@ import org.junit.Test;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.zxq.iov.cloud.trace.demo.dubbo.model.Employee;
 import com.zxq.iov.cloud.trace.demo.mongo.model.User;
 import com.zxq.iov.cloud.trace.dto.OTAMessage;
 
@@ -31,13 +32,22 @@ public class ConsumerTest {
 //	}
 	
 	@Test
-	public void testMongodb() {
+	public void testMysql() {
 //		String url = "http://localhost:8080/trace-demo-app/hello/aaa";
-		String url = "http://10.25.23.102:8080/trace-demo-app/user/aaa";
+		String url = "http://10.25.23.102:8080/trace-demo-app/employee/1";
 		String result = doGet(url, "GET");
-		User user = getJsonToObj(result, "data", User.class);
-		Assert.assertNotNull("aaa", user.getName());
+		Employee employee = getJsonToObj(result, "data", Employee.class);
+		Assert.assertNotNull("Mike", employee.getName());
 	}
+	
+//	@Test
+//	public void testMongodb() {
+////		String url = "http://localhost:8080/trace-demo-app/hello/aaa";
+//		String url = "http://10.25.23.102:8080/trace-demo-app/user/aaa";
+//		String result = doGet(url, "GET");
+//		User user = getJsonToObj(result, "data", User.class);
+//		Assert.assertNotNull("aaa", user.getName());
+//	}
 	
 //	@Test
 //	public void testSend() throws IOException {

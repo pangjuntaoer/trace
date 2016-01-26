@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="
     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
 	<aop:aspectj-autoproxy proxy-target-class="true" />
 	<context:annotation-config />
@@ -16,9 +17,59 @@
 			<list>
 				<value>classpath:redis.properties</value>
 				<value>classpath:dubbo.properties</value>
+				<value>classpath:jdbc.properties</value>
+				<value>classpath:hibernate.properties</value>
 			</list>
 		</property>
 		<property name="ignoreUnresolvablePlaceholders" value="true" />
 		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
 	</bean>
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="username" value="${connection.username}" />
+		<property name="password" value="${connection.password}" />
+		<property name="url" value="${connection.url}" />
+		<property name="driverClassName" value="${connection.driverClassName}" />
+		<property name="maxActive" value="${connection.maxActive}" />
+		<property name="maxIdle" value="${connection.maxIdle}" />
+		<property name="minIdle" value="${connection.minIdle}" />
+		<property name="maxWait" value="${connection.maxWait}" />
+		<property name="removeAbandoned" value="${connection.removeAbandoned}" />
+		<property name="removeAbandonedTimeout" value="${connection.removeAbandonedTimeout}" />
+		<property name="logAbandoned" value="${connection.logAbandoned}" />
+	</bean>
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="packagesToScan">
+			<list>
+				<value>com.zxq.iov.cloud.trace.demo.dubbo.model</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
+				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+				<prop key="hibernate.format_sql">true</prop>
+				<prop key="javax.persistence.validation.mode">none</prop>
+				<!-- <prop key="hibernate.default_schema">${hibernate.default_schema}</prop> -->
+				<prop key="hibernate.hbm2ddl.auto">none</prop>
+				<prop key="jdbc.use_scrollable_resultset">false</prop>
+				<prop key="hibernate.current_session_context_class">org.springframework.orm.hibernate4.SpringSessionContext
+				</prop>
+				<prop key="hibernate.temp.use_jdbc_metadata_defaults">false</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
 </beans>

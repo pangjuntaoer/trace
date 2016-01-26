@@ -27,4 +27,8 @@
 	<dubbo:reference id="userServiceApi" check="false"
 		protocol="dubbo" interface="com.zxq.iov.cloud.trace.demo.mongo.iface.UserServiceApi"
 		filter="traceDubboConsumerFilter" />
+
+	<dubbo:reference id="employeeServiceApi" check="false"
+		protocol="dubbo" interface="com.zxq.iov.cloud.trace.demo.dubbo.iface.EmployeeServiceApi"
+		filter="traceDubboConsumerFilter" />
 </beans>
