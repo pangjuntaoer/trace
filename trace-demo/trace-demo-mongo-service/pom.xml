@@ -16,11 +16,17 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<trace-demo-mongo-iface.version>3</trace-demo-mongo-iface.version>
 		<trace-api.version>3</trace-api.version>
+		<trace-mongodb.version>3</trace-mongodb.version>
 	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-mongodb</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.zxq.iov.cloud</groupId>
+			<artifactId>trace-mongodb</artifactId>
+			<version>${trace-mongodb.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.zxq.iov.cloud</groupId>

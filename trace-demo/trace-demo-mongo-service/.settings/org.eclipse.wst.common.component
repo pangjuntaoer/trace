@@ -4,6 +4,9 @@
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+        <dependent-module archiveName="trace-mongodb-3.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/trace-mongodb/trace-mongodb">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <dependent-module archiveName="trace-demo-mongo-iface-3.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/trace-demo-mongo-iface/trace-demo-mongo-iface">
             <dependency-type>uses</dependency-type>
         </dependent-module>

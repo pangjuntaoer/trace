@@ -1,11 +1,13 @@
 package com.zxq.iov.cloud.trace.demo.mongo.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
+@SuppressWarnings("serial")
 @Document
-public class User {
+public class User implements Serializable {
 	
 	private String id;
 	
