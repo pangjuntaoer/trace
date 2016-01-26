@@ -50,5 +50,6 @@
 		<module>trace-mq</module>
 		<module>trace-redis</module>
     <module>trace-mongodb</module>
+    <module>trace-db</module>
   </modules>
 </project>

@@ -13,6 +13,9 @@
         <dependent-module archiveName="trace-redis-3.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/trace-redis/trace-redis">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="trace-db-3.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/trace-db/trace-db">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="trace-demo-dubbo-provider"/>
         <property name="java-output-path" value="/trace-demo-dubbo-provider/target/classes"/>
     </wb-module>
