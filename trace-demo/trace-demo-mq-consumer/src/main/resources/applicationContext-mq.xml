@@ -29,7 +29,7 @@ http://www.springframework.org/schema/rabbit http://www.springframework.org/sche
 
 	<!-- 监听类设置 -->
 	<rabbit:listener-container
-		connection-factory="connectionFactory" message-converter="dtoMessageConvertor">
+		connection-factory="connectionFactory">
 		<rabbit:listener ref="consumer" method="onMessage"
 			queue-names="traceInQueue" />
 	</rabbit:listener-container>

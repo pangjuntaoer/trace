@@ -21,10 +21,12 @@ import com.zxq.iov.cloud.trace.dto.MsgWrapperDto;
 @Order(0)
 public class TraceTboxAppAop {
 
-	private static final String PC_AMQP_R = "execution(public* com.zxq.iov.cloud.app.tbox.GatewayEntryPoint.onMessage(com.zxq.iov.cloud.trace.dto.MsgWrapperDto))";
+	private static final String PC_AMQP_R = "execution(public* com.zxq.iov.cloud.app.tbox.GatewayEntryPoint.onMessage(com.zxq.iov.cloud.trace.dto.MsgWrapperDto))"
+			 + " or " +
+			 "execution(public* com.zxq.iov.cloud.app.tbox.ServiceEntryPoint.onMessage(com.zxq.iov.cloud.trace.dto.MsgWrapperDto))";
 
 	@Around(value = PC_AMQP_R)
-	public Object aroundAmqpRecive(ProceedingJoinPoint point) throws Throwable {
+	public Object aroundTboxApp(ProceedingJoinPoint point) throws Throwable {
 		Object result = null;
 		Object[] args = point.getArgs();
 		Tracer tracer = Tracer.getTracer();

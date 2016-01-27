@@ -1,10 +1,6 @@
 package com.zxq.iov.cloud.trace.mq.aop;
 
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
-import org.springframework.core.annotation.Order;
-import org.springframework.stereotype.Component;
 
 import com.zxq.iov.cloud.trace.Annotation;
 import com.zxq.iov.cloud.trace.AnnotationType;
@@ -13,17 +9,17 @@ import com.zxq.iov.cloud.trace.TraceContext;
 import com.zxq.iov.cloud.trace.Tracer;
 import com.zxq.iov.cloud.trace.dto.MsgWrapperDto;
 
-@Component
-@Aspect
-@Order(0)
+//@Component
+//@Aspect
+//@Order(0)
 public class TraceMqSendAop {
 	
-	private static final String PC_AMQP_S_1 = "execution(public* org..AmqpTemplate.convertAndSend(Object))";
-
-	private static final String PC_AMQP_S_2 = "execution(public* org..AmqpTemplate.convertAndSend(String, Object))";
-
-	@Around(value = PC_AMQP_S_1 + " or " + PC_AMQP_S_2)
-	public Object aroundAmqpSend(ProceedingJoinPoint point) throws Throwable {
+//	private static final String PC_AMQP_S_1 = "execution(public* org..AmqpTemplate.convertAndSend(Object))";
+//
+//	private static final String PC_AMQP_S_2 = "execution(public* org..AmqpTemplate.convertAndSend(String, Object))";
+//
+//	@Around(value = PC_AMQP_S_1 + " or " + PC_AMQP_S_2)
+	public Object around(ProceedingJoinPoint point) throws Throwable {
 		System.out.println("----------TraceMqAop start--------------------" + System.currentTimeMillis());
 		Object[] args = point.getArgs();
 		Tracer tracer = Tracer.getTracer();

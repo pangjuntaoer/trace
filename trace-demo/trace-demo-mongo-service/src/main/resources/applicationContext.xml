@@ -6,8 +6,6 @@
     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
-	<aop:aspectj-autoproxy />
-	<context:annotation-config />
 	<context:component-scan base-package="com.zxq.iov.cloud" />
 
 	<bean id="configproperties"
@@ -20,4 +18,15 @@
 		<property name="ignoreUnresolvablePlaceholders" value="true" />
 		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
 	</bean>
+	
+	<bean id="traceMongodbAop" class="com.zxq.iov.cloud.trace.mongodb.TraceMongodbAop"/>
+
+	<aop:config>
+		<aop:pointcut id="pc-mongodb"
+			expression="execution(public* com.zxq.iov.cloud..mongo..*Repository.*(..))" />
+		<aop:aspect id="traceMongodbAop" ref="traceMongodbAop">
+			<aop:around method="around" pointcut-ref="pc-mongodb" />
+		</aop:aspect>
+	</aop:config>
+
 </beans>

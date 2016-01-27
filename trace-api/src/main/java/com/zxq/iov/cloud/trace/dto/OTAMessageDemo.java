@@ -2,14 +2,8 @@ package com.zxq.iov.cloud.trace.dto;
 
 import java.io.Serializable;
 
-/**
- * TBOX发起的OTA请求的包装类
- * 包含经过预处理的请求dispatch数据和原始数据
- * @author zhuxy
- * @date 2015/4/30 0030
- */
 @SuppressWarnings("serial")
-public class OTAMessage implements Serializable {
+public class OTAMessageDemo implements Serializable {
     //上行的OTA请求, 包括主动上行和ApplicationACK请求
     public static final int TYPE_UPLINK = 0;
     //上行Dispatch ACK请求
@@ -94,7 +88,7 @@ public class OTAMessage implements Serializable {
 
     private byte[] appData;
 
-    public OTAMessage() {
+    public OTAMessageDemo() {
     }
 
     public String getSourceIP() {

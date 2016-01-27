@@ -1,35 +1,20 @@
 package com.zxq.iov.cloud.trace.demo.mq.consumer;
 
 import java.io.UnsupportedEncodingException;
-import java.util.Map;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.zxq.iov.cloud.trace.dto.MsgWrapperDto;
-import com.zxq.iov.cloud.trace.dto.OTAMessage;
+import com.zxq.iov.cloud.trace.dto.OTAMessageDemo;
 import com.zxq.iov.cloud.trace.utils.ObjectTransferUtil;
 
 public class ConsumerMessageListener {
-
-	public void onMessage(String message) {
-		System.out.println("string received message: " + message);
+	
+	public void onMessage(byte[] message) throws UnsupportedEncodingException, JsonProcessingException {
+		OTAMessageDemo m = ObjectTransferUtil.getObjFromJson(new String(message, "utf-8"), "message", OTAMessageDemo.class);
+		onMessage(m);
 	}
 	
-	public void onMessage(byte[] message) throws UnsupportedEncodingException {
-		System.out.println(message);
-		System.out.println("byte received message: " + new String(message, "utf-8"));
+	private void onMessage(OTAMessageDemo message) throws JsonProcessingException, UnsupportedEncodingException {
+		System.out.println(new String(message.getAppData(), "utf-8"));
 	}
-	
-	@SuppressWarnings("unchecked")
-	public void onMessage(MsgWrapperDto dto) throws Exception {
-    	OTAMessage message = ObjectTransferUtil.convertMap(OTAMessage.class, (Map<String,Object>)(dto.getMessage()));
-    	onMessage(message);
-    }
-	
-	private void onMessage(OTAMessage message) throws JsonProcessingException {
-		System.out.println(new ObjectMapper().writeValueAsString(message));
-	}
-    
-    
 
 }

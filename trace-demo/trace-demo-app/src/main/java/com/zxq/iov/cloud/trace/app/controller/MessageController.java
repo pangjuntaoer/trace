@@ -14,7 +14,7 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zxq.iov.cloud.trace.demo.mq.iface.MessageServiceApi;
-import com.zxq.iov.cloud.trace.dto.OTAMessage;
+import com.zxq.iov.cloud.trace.dto.OTAMessageDemo;
 
 @Controller
 @RequestMapping("/message")
@@ -31,7 +31,7 @@ public class MessageController {
 	@ResponseBody
 	public String sendMessage(HttpServletRequest request) throws JsonParseException, JsonMappingException, IOException {
 		String messages = request.getParameter("message");
-		OTAMessage message = new ObjectMapper().readValue(messages, OTAMessage.class);
+		OTAMessageDemo message = new ObjectMapper().readValue(messages, OTAMessageDemo.class);
 		messageServiceApi.send(message);
 		return "success";
 	}

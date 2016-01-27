@@ -17,45 +17,44 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zxq.iov.cloud.trace.demo.dubbo.model.Employee;
-import com.zxq.iov.cloud.trace.demo.mongo.model.User;
-import com.zxq.iov.cloud.trace.dto.OTAMessage;
+import com.zxq.iov.cloud.trace.dto.OTAMessageDemo;
 
 public class ConsumerTest {
 
 //	@Test
-//	public void testSayHello() {
+//	public void testRedis() {
 ////		String url = "http://localhost:8080/trace-demo-app/hello/aaa";
 //		String url = "http://10.25.23.102:8080/trace-demo-app/hello/aaa2";
 //		String result = doGet(url, "GET");
-//		String hello = getJsonToObj(result, "data", String.class);
+//		String hello = getObjFromJson(result, "data", String.class);
 //		Assert.assertNotNull(result, hello);
 //	}
 	
-	@Test
-	public void testMysql() {
-//		String url = "http://localhost:8080/trace-demo-app/hello/aaa";
-		String url = "http://10.25.23.102:8080/trace-demo-app/employee/1";
-		String result = doGet(url, "GET");
-		Employee employee = getJsonToObj(result, "data", Employee.class);
-		Assert.assertNotNull("Mike", employee.getName());
-	}
+//	@Test
+//	public void testdb() {
+////		String url = "http://localhost:8080/trace-demo-app/hello/aaa";
+//		String url = "http://10.25.23.102:8080/trace-demo-app/employee/1";
+//		String result = doGet(url, "GET");
+//		Employee employee = getObjFromJson(result, "data", Employee.class);
+//		Assert.assertNotNull("Mike", employee.getName());
+//	}
 	
 //	@Test
 //	public void testMongodb() {
 ////		String url = "http://localhost:8080/trace-demo-app/hello/aaa";
 //		String url = "http://10.25.23.102:8080/trace-demo-app/user/aaa";
 //		String result = doGet(url, "GET");
-//		User user = getJsonToObj(result, "data", User.class);
+//		User user = getObjFromJson(result, "data", User.class);
 //		Assert.assertNotNull("aaa", user.getName());
 //	}
 	
-//	@Test
-//	public void testSend() throws IOException {
-////		String url = "http://localhost:8080/trace-demo-app/message/send";
-//		String url = "http://10.25.23.102:8080/trace-demo-app/message/send";
-//		String result = doPost(url, "POST");
-//		Assert.assertNull(result, "success");
-//	}
+	@Test
+	public void testMq() throws IOException {
+//		String url = "http://localhost:8080/trace-demo-app/message/send";
+		String url = "http://10.25.23.102:8080/trace-demo-app/message/send";
+		String result = doPost(url, "POST");
+		Assert.assertNull(result, "success");
+	}
 
 	private static ObjectMapper mapper = new ObjectMapper();
 
@@ -63,7 +62,7 @@ public class ConsumerTest {
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 	}
 
-	private <T> T getJsonToObj(String jsonContent, String nodeName, Class<T> classT) {
+	private <T> T getObjFromJson(String jsonContent, String nodeName, Class<T> classT) {
 		JsonNode node = null;
 		try {
 			node = mapper.readTree(jsonContent).findValue(nodeName);
@@ -86,14 +85,13 @@ public class ConsumerTest {
         // conn.setReadTimeout(2000);//读取超时 单位毫秒
         conn.setDoOutput(true);// 是否输入参数
 
-        OTAMessage message = new OTAMessage();
+        OTAMessageDemo message = new OTAMessageDemo();
         message.setAckMessageCounter(1);
         message.setAckRequired(true);
         message.setAid("aid");
-        message.setAppData("appData".getBytes());
+        message.setAppData("中国".getBytes("utf-8"));
         
         String para = mapper.writeValueAsString(message);
-//        System.out.println(para);
         OutputStream outStream = conn.getOutputStream();
         outStream.write(("message=" + para).getBytes());// 输入参数
         outStream.flush();

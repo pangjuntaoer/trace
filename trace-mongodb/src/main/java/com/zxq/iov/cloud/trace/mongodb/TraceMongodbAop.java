@@ -3,10 +3,6 @@ package com.zxq.iov.cloud.trace.mongodb;
 import java.util.Map;
 
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
-import org.springframework.core.annotation.Order;
-import org.springframework.stereotype.Component;
 
 import com.zxq.iov.cloud.trace.Annotation;
 import com.zxq.iov.cloud.trace.AnnotationType;
@@ -14,15 +10,15 @@ import com.zxq.iov.cloud.trace.Span;
 import com.zxq.iov.cloud.trace.TraceContext;
 import com.zxq.iov.cloud.trace.Tracer;
 
-@Component
-@Aspect
-@Order(0)
+//@Component
+//@Aspect
+//@Order(0)
 public class TraceMongodbAop {
 	
-	private static final String PC_MONGODB = "execution(public* com.zxq.iov.cloud..mongo..*Repository.*(..))";
-
-	@Around(value = PC_MONGODB)
-	public Object aroundMongodb(ProceedingJoinPoint point) throws Throwable {
+//	private static final String PC_MONGODB = "execution(public* com.zxq.iov.cloud..mongo..*Repository.*(..))";
+//
+//	@Around(value = PC_MONGODB)
+	public Object around(ProceedingJoinPoint point) throws Throwable {
 		Object result = null;
 		Tracer tracer = Tracer.getTracer();
 		TraceContext context = tracer.getTraceContext();

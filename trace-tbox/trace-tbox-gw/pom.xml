@@ -8,5 +8,5 @@
     <version>3</version>
   </parent>
   <artifactId>trace-tbox-gw</artifactId>
-  <packaging>jar</packaging>
+  <name>trace-tbox-gw</name>
 </project>

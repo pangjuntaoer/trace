@@ -7,8 +7,6 @@
     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
-	<aop:aspectj-autoproxy proxy-target-class="true" />
-	<context:annotation-config />
 	<context:component-scan base-package="com.zxq.iov.cloud" />
 
 	<bean id="configproperties"
@@ -71,5 +69,21 @@
 	</bean>
 
 	<tx:annotation-driven transaction-manager="transactionManager" />
+
+	<bean id="traceRedisAop" class="com.zxq.iov.cloud.trace.redis.aop.TraceRedisAop" />
+	<bean id="traceDaoAop" class="com.zxq.iov.cloud.trace.db.TraceDaoAop" />
+
+	<aop:config>
+		<aop:pointcut id="pc-redis"
+			expression="execution(public* com.zxq.iov.cloud.trace.utils.JedisClusterUtils.*(..))" />
+		<aop:pointcut id="pc-db"
+			expression="execution(public* com.zxq.iov.cloud..dao..*Dao.*(..))" />
+		<aop:aspect id="traceRedisAop" ref="traceRedisAop">
+			<aop:around method="around" pointcut-ref="pc-redis" />
+		</aop:aspect>
+		<aop:aspect id="traceDaoAop" ref="traceDaoAop">
+			<aop:around method="around" pointcut-ref="pc-db" />
+		</aop:aspect>
+	</aop:config>
 
 </beans>
