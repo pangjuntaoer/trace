@@ -22,8 +22,6 @@ public class TraceDubboConsumerFilter implements Filter {
 
 	// 调用过程拦截
 	public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
-
-		System.out.println("-------------------TraceDubboConsumerFilter start-----------------------------" + System.currentTimeMillis());
 		TraceContext context = tracer.getTraceContext();
 		boolean isSample = context.getIsSample();
 
@@ -42,9 +40,6 @@ public class TraceDubboConsumerFilter implements Filter {
 			invocation1.setAttachment("traceId", context.getTraceId());
 			invocation1.setAttachment("isSample", String.valueOf(isSample));
 			invocation1.setAttachment("parentSpanId", context.getCurrentSpanId());
-			System.out.println("traceId: " + context.getTraceId());
-			System.out.println("isSample: " + isSample);
-			System.out.println("parentSpanId: " + context.getCurrentSpanId());
 			Result result = invoker.invoke(invocation);
 			if (isSample && result.getException() != null) {
 				span.addBinaryAnnotation(
@@ -58,7 +53,6 @@ public class TraceDubboConsumerFilter implements Filter {
 						context.getIp(), null));
 				tracer.sendSpan(span);
 			}
-			System.out.println("-------------------TraceDubboConsumerFilter end-----------------------------" + System.currentTimeMillis());
 		}
 	}
 

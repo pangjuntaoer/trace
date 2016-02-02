@@ -23,17 +23,12 @@ public class TraceDubboProviderFilter implements Filter {
 
 	// 调用过程拦截
 	public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
-
-		System.out.println("-----------TraceDubboProviderFilter start--------------" + System.currentTimeMillis());
 		Span span = null;
 		RpcContext rc = RpcContext.getContext();
 
 		boolean isSample = Boolean.valueOf(rc.getAttachment("isSample"));
 		String traceId = rc.getAttachment("traceId");
 		String parentSpanId = rc.getAttachment("parentSpanId");
-		System.out.println("traceId: " + traceId);
-		System.out.println("isSample: " + isSample);
-		System.out.println("parentSpanId: " + parentSpanId);
 		TraceContext context = tracer.getTraceContext();
 		if (context == null) {
 			context = new TraceContext();
@@ -66,7 +61,6 @@ public class TraceDubboProviderFilter implements Filter {
 				tracer.sendSpan(span);
 			}
 			tracer.removeTraceContext();
-			System.out.println("----------TraceDubboProviderFilter end-------------" + System.currentTimeMillis());
 		}
 	}
 

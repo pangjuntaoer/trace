@@ -20,15 +20,11 @@ public class TraceMqSendAop {
 //
 //	@Around(value = PC_AMQP_S_1 + " or " + PC_AMQP_S_2)
 	public Object around(ProceedingJoinPoint point) throws Throwable {
-		System.out.println("----------TraceMqAop start--------------------" + System.currentTimeMillis());
 		Object[] args = point.getArgs();
 		Tracer tracer = Tracer.getTracer();
 		TraceContext context = tracer.getTraceContext();
 		Boolean isSample = context.getIsSample();
 		String traceId = context.getTraceId();
-		System.out.println("traceId: " + context.getTraceId());
-		System.out.println("isSample: " + isSample);
-		System.out.println("parentSpanId: " + context.getParentSpanId());
 		Span span = null;
 		if (isSample) {
 			String currentSpanId = tracer.genCurrentSpanId(context.getParentSpanId());
@@ -51,7 +47,6 @@ public class TraceMqSendAop {
 						new Annotation(AnnotationType.CR.name(), System.currentTimeMillis(), context.getIp(), null));
 				tracer.sendSpan(span);
 			}
-			System.out.println("----------TraceMqAop end--------------------" + System.currentTimeMillis());
 		}
 	}
 

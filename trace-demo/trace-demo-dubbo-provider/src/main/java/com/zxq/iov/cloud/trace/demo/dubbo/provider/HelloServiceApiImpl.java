@@ -13,7 +13,6 @@ public class HelloServiceApiImpl implements HelloServiceApi {
 	JedisClusterUtils jedisClusterUtils;
 
 	public String sayHello(String name) {
-		System.out.println("------------use redis---------");
 		jedisClusterUtils.set("username", name);
 		return "Hello " + jedisClusterUtils.get("username");
 	}

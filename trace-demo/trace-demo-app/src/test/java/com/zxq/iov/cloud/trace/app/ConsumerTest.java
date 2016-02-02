@@ -13,6 +13,7 @@ import java.util.Map;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.fasterxml.jackson.core.JsonEncoding;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -27,17 +28,17 @@ public class ConsumerTest {
 //		String url = "http://10.25.23.102:8080/trace-demo-app/hello/aaa2";
 //		String result = doGet(url, "GET");
 //		String hello = getObjFromJson(result, "data", String.class);
-//		Assert.assertNotNull(result, hello);
+//		Assert.assertEquals(result, hello);
 //	}
 	
-//	@Test
-//	public void testdb() {
-////		String url = "http://localhost:8080/trace-demo-app/hello/aaa";
-//		String url = "http://10.25.23.102:8080/trace-demo-app/employee/1";
-//		String result = doGet(url, "GET");
-//		Employee employee = getObjFromJson(result, "data", Employee.class);
-//		Assert.assertNotNull("Mike", employee.getName());
-//	}
+	@Test
+	public void testdb() {
+//		String url = "http://localhost:8080/trace-demo-app/hello/aaa";
+		String url = "http://10.25.23.102:8080/trace-demo-app/employee/2";
+		String result = doGet(url, "GET");
+		Employee employee = getObjFromJson(result, "data", Employee.class);
+		Assert.assertEquals("Jack", employee.getName());
+	}
 	
 //	@Test
 //	public void testMongodb() {
@@ -45,16 +46,16 @@ public class ConsumerTest {
 //		String url = "http://10.25.23.102:8080/trace-demo-app/user/aaa";
 //		String result = doGet(url, "GET");
 //		User user = getObjFromJson(result, "data", User.class);
-//		Assert.assertNotNull("aaa", user.getName());
+//		Assert.assertEquals("aaa", user.getName());
 //	}
 	
-	@Test
-	public void testMq() throws IOException {
-//		String url = "http://localhost:8080/trace-demo-app/message/send";
-		String url = "http://10.25.23.102:8080/trace-demo-app/message/send";
-		String result = doPost(url, "POST");
-		Assert.assertNull(result, "success");
-	}
+//	@Test
+//	public void testMq() throws IOException {
+////		String url = "http://localhost:8080/trace-demo-app/message/send";
+//		String url = "http://10.25.23.102:8080/trace-demo-app/message/send";
+//		String result = doPost(url, "POST");
+//		Assert.assertEquals(result, "success");
+//	}
 
 	private static ObjectMapper mapper = new ObjectMapper();
 
@@ -89,7 +90,7 @@ public class ConsumerTest {
         message.setAckMessageCounter(1);
         message.setAckRequired(true);
         message.setAid("aid");
-        message.setAppData("中国".getBytes("utf-8"));
+        message.setAppData("中国".getBytes(JsonEncoding.UTF8.name()));
         
         String para = mapper.writeValueAsString(message);
         OutputStream outStream = conn.getOutputStream();
@@ -98,7 +99,7 @@ public class ConsumerTest {
         outStream.close();
         String input = null;
         StringBuffer outInfo = new StringBuffer();
-        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));
+        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), JsonEncoding.UTF8.name()));
 		while ((input = br.readLine()) != null) {
 			outInfo.append(input);
 		}
@@ -126,7 +127,7 @@ public class ConsumerTest {
 					System.out.print(String.format("****HeaderField:%s=%s", entry.getKey(), entry.getValue().get(0)));
 				}
 			}
-			br = new BufferedReader(new InputStreamReader(con.getInputStream(), "utf-8"));
+			br = new BufferedReader(new InputStreamReader(con.getInputStream(), JsonEncoding.UTF8.name()));
 			while ((input = br.readLine()) != null) {
 				outInfo.append(input);
 			}

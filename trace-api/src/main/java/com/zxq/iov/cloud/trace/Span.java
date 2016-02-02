@@ -3,6 +3,8 @@ package com.zxq.iov.cloud.trace;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.saicmotor.telematics.framework.core.common.SpringContext;
+
 public class Span {
 	
 	public Span() {
@@ -11,6 +13,7 @@ public class Span {
 	public Span(String traceId, String spanId) {
 		this.traceId = traceId;
 		this.spanId = spanId;
+		appId = SpringContext.getInstance().getProperty("WEB_ENV_NAME");
 	}
 	
 	private String traceId;
@@ -18,6 +21,8 @@ public class Span {
 	private String spanId;
 	
 	private String signature;
+	
+	private String appId;
 	
 	private List<Annotation> annotations = new ArrayList<Annotation>();
 	
@@ -69,6 +74,14 @@ public class Span {
 
 	public void setBinaryAnnotations(List<BinaryAnnotation> binaryAnnotations) {
 		this.binaryAnnotations = binaryAnnotations;
+	}
+
+	public String getAppId() {
+		return appId;
+	}
+
+	public void setAppId(String appId) {
+		this.appId = appId;
 	}
 
 }
