@@ -20,10 +20,11 @@
 		<property name="ignoreUnresolvablePlaceholders" value="true" />
 		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
 	</bean>
-	
-	<util:properties id="props" location="classpath:/config/template.properties"/> 
-	
-	<bean id="traceMongodbAop" class="com.zxq.iov.cloud.trace.mongodb.TraceMongodbAop"/>
+
+	<util:properties id="props"
+		location="classpath:/config/template.properties" />
+
+	<bean id="traceMongodbAop" class="com.zxq.iov.cloud.trace.mongodb.TraceMongodbAop" />
 
 	<aop:config>
 		<aop:pointcut id="pc-mongodb"

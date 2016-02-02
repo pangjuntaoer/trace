@@ -40,22 +40,22 @@ public class ConsumerTest {
 //		Assert.assertEquals("Jack", employee.getName());
 //	}
 	
-	@Test
-	public void testMongodb() {
-//		String url = "http://localhost:8080/trace-demo-app/hello/aaa";
-		String url = "http://10.25.23.102:8080/trace-demo-app/user/aaa";
-		String result = doGet(url, "GET");
-		User user = getObjFromJson(result, "data", User.class);
-		Assert.assertEquals("aaa", user.getName());
-	}
-	
 //	@Test
-//	public void testMq() throws IOException {
-////		String url = "http://localhost:8080/trace-demo-app/message/send";
-//		String url = "http://10.25.23.102:8080/trace-demo-app/message/send";
-//		String result = doPost(url, "POST");
-//		Assert.assertEquals(result, "success");
+//	public void testMongodb() {
+////		String url = "http://localhost:8080/trace-demo-app/hello/aaa";
+//		String url = "http://10.25.23.102:8080/trace-demo-app/user/aaa";
+//		String result = doGet(url, "GET");
+//		User user = getObjFromJson(result, "data", User.class);
+//		Assert.assertEquals("aaa", user.getName());
 //	}
+	
+	@Test
+	public void testMq() throws IOException {
+//		String url = "http://localhost:8080/trace-demo-app/message/send";
+		String url = "http://10.25.23.102:8080/trace-demo-app/message/send";
+		String result = doPost(url, "POST");
+		Assert.assertEquals(result, "success");
+	}
 
 	private static ObjectMapper mapper = new ObjectMapper();
 
@@ -94,7 +94,7 @@ public class ConsumerTest {
         
         String para = mapper.writeValueAsString(message);
         OutputStream outStream = conn.getOutputStream();
-        outStream.write(("message=" + para).getBytes());// 输入参数
+        outStream.write(("message=" + para).getBytes(JsonEncoding.UTF8.name()));// 输入参数
         outStream.flush();
         outStream.close();
         String input = null;
