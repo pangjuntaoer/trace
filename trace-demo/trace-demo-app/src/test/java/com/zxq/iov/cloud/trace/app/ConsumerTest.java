@@ -17,7 +17,7 @@ import com.fasterxml.jackson.core.JsonEncoding;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.zxq.iov.cloud.trace.demo.dubbo.model.Employee;
+import com.zxq.iov.cloud.trace.demo.mongo.model.User;
 import com.zxq.iov.cloud.trace.dto.OTAMessageDemo;
 
 public class ConsumerTest {
@@ -31,23 +31,23 @@ public class ConsumerTest {
 //		Assert.assertEquals(result, hello);
 //	}
 	
-	@Test
-	public void testdb() {
-//		String url = "http://localhost:8080/trace-demo-app/hello/aaa";
-		String url = "http://10.25.23.102:8080/trace-demo-app/employee/2";
-		String result = doGet(url, "GET");
-		Employee employee = getObjFromJson(result, "data", Employee.class);
-		Assert.assertEquals("Jack", employee.getName());
-	}
-	
 //	@Test
-//	public void testMongodb() {
+//	public void testdb() {
 ////		String url = "http://localhost:8080/trace-demo-app/hello/aaa";
-//		String url = "http://10.25.23.102:8080/trace-demo-app/user/aaa";
+//		String url = "http://10.25.23.102:8080/trace-demo-app/employee/2";
 //		String result = doGet(url, "GET");
-//		User user = getObjFromJson(result, "data", User.class);
-//		Assert.assertEquals("aaa", user.getName());
+//		Employee employee = getObjFromJson(result, "data", Employee.class);
+//		Assert.assertEquals("Jack", employee.getName());
 //	}
+	
+	@Test
+	public void testMongodb() {
+//		String url = "http://localhost:8080/trace-demo-app/hello/aaa";
+		String url = "http://10.25.23.102:8080/trace-demo-app/user/aaa";
+		String result = doGet(url, "GET");
+		User user = getObjFromJson(result, "data", User.class);
+		Assert.assertEquals("aaa", user.getName());
+	}
 	
 //	@Test
 //	public void testMq() throws IOException {

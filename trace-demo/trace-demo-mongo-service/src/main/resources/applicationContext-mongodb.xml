@@ -4,11 +4,11 @@
 	xmlns:mongo="http://www.springframework.org/schema/data/mongo"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd 
 http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo-1.8.xsd">
-	<mongo:db-factory host="localhost" port="27017" dbname="test" />
-	<!-- <mongo:mongo host="localhost" port="27017" /> -->
+	<mongo:db-factory host="${host}" port="${port}" dbname="${dbname}" />
+	<!-- <mongo:mongo host="${host}" port="${port}" /> -->
 	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
 		<!-- <constructor-arg name="mongo" ref="mongo" />
-		<constructor-arg name="databaseName" value="test" /> -->
+		<constructor-arg name="databaseName" value="${dbname}" /> -->
 		<constructor-arg name="mongoDbFactory" ref="mongoDbFactory"/>
 	</bean>
 	<mongo:repositories base-package="com.zxq.iov.cloud.trace.demo.mongo.service.repositories" />

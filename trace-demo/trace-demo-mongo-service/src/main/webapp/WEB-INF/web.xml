@@ -22,8 +22,12 @@
             classpath*:applicationContext.xml,classpath*:applicationContext-*.xml
         </param-value>
 	</context-param>
-	<listener>
+	<!-- <listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener> -->
+	
+	<listener>
+		<listener-class>com.saicmotor.telematics.framework.core.listener.SpringContextInitializeListener</listener-class>
 	</listener>
 
 	<servlet>
