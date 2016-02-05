@@ -18,7 +18,6 @@
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations">
 			<list>
-				<value>classpath:redis.properties</value>
 				<value>classpath:dubbo.properties</value>
 				<value>classpath:jdbc.properties</value>
 				<value>classpath:hibernate.properties</value>
@@ -80,7 +79,7 @@
 
 	<aop:config>
 		<aop:pointcut id="pc-redis"
-			expression="execution(public* com.zxq.iov.cloud.trace.utils.JedisClusterUtils.*(..))" />
+			expression="execution(public* com.saicmotor.telematics.framework.core.redis.JedisClusterUtils.*(..))" />
 		<aop:pointcut id="pc-db"
 			expression="execution(public* com.zxq.iov.cloud..dao..*Dao.*(..))" />
 		<aop:aspect id="traceRedisAop" ref="traceRedisAop">

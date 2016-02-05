@@ -59,6 +59,10 @@
 			<artifactId>trace-db</artifactId>
 			<version>${trace-db.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>com.saicmotor.telematics.framework.core</groupId>
+			<artifactId>core-common</artifactId>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>trace-demo-dubbo-provider</finalName>

@@ -22,14 +22,15 @@ import com.zxq.iov.cloud.trace.dto.OTAMessageDemo;
 
 public class ConsumerTest {
 
-//	@Test
-//	public void testRedis() {
-////		String url = "http://localhost:8080/trace-demo-app/hello/aaa";
-//		String url = "http://10.25.23.102:8080/trace-demo-app/hello/aaa2";
-//		String result = doGet(url, "GET");
-//		String hello = getObjFromJson(result, "data", String.class);
-//		Assert.assertEquals(result, hello);
-//	}
+	@Test
+	public void testRedis() {
+		String name="aaaa";
+//		String url = "http://localhost:8080/trace-demo-app/hello/" + name;
+		String url = "http://10.25.23.102:8080/trace-demo-app/hello/" + name;
+		String result = doGet(url, "GET");
+		String hello = getObjFromJson(result, "data", String.class);
+		Assert.assertEquals("Hello " + name, hello);
+	}
 	
 //	@Test
 //	public void testdb() {
@@ -49,13 +50,13 @@ public class ConsumerTest {
 //		Assert.assertEquals("aaa", user.getName());
 //	}
 	
-	@Test
-	public void testMq() throws IOException {
-//		String url = "http://localhost:8080/trace-demo-app/message/send";
-		String url = "http://10.25.23.102:8080/trace-demo-app/message/send";
-		String result = doPost(url, "POST");
-		Assert.assertEquals(result, "success");
-	}
+//	@Test
+//	public void testMq() throws IOException {
+////		String url = "http://localhost:8080/trace-demo-app/message/send";
+//		String url = "http://10.25.23.102:8080/trace-demo-app/message/send";
+//		String result = doPost(url, "POST");
+//		Assert.assertEquals(result, "success");
+//	}
 
 	private static ObjectMapper mapper = new ObjectMapper();
 
