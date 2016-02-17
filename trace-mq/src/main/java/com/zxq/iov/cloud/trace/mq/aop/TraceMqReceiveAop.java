@@ -16,7 +16,7 @@ import com.zxq.iov.cloud.trace.utils.ObjectTransferUtil;
 //@Component
 //@Aspect
 //@Order(0)
-public class TraceMqReciveAop {
+public class TraceMqReceiveAop {
 
 //	private static final String PC_AMQP_R = "execution(public* com.zxq.iov.cloud..*MessageListener.onMessage(com.zxq.iov.cloud.trace.dto.MsgWrapperDto))";
 //

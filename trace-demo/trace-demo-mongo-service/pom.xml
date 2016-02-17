@@ -20,6 +20,11 @@
 	</properties>
 	<dependencies>
 		<dependency>
+			<groupId>com.zxq.iov.cloud</groupId>
+			<artifactId>trace-api</artifactId>
+			<version>${trace-api.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-mongodb</artifactId>
 		</dependency>
@@ -32,11 +37,6 @@
 			<groupId>com.zxq.iov.cloud</groupId>
 			<artifactId>trace-demo-mongo-iface</artifactId>
 			<version>${trace-demo-mongo-iface.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.zxq.iov.cloud</groupId>
-			<artifactId>trace-api</artifactId>
-			<version>${trace-api.version}</version>
 		</dependency>
 	</dependencies>
 	<build>

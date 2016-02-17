@@ -1,4 +1,4 @@
-package com.zxq.iov.cloud.trace.demo.mongo.service.repositories;
+package com.zxq.iov.cloud.trace.demo.mongo.repositories;
 
 import com.zxq.iov.cloud.trace.demo.mongo.model.User;
 

@@ -14,15 +14,6 @@ http://www.springframework.org/schema/rabbit http://www.springframework.org/sche
 		<property name="addresses" value="${hostsAndPorts}" />
 	</bean>
 
-	<bean id="dtoMessageConvertor"
-		class="org.springframework.amqp.support.converter.Jackson2JsonMessageConverter">
-		<property name="classMapper">
-			<bean class="org.springframework.amqp.support.converter.DefaultClassMapper">
-				<property name="defaultType" value="com.zxq.iov.cloud.trace.dto.MsgWrapperDto" />
-			</bean>
-		</property>
-	</bean>
-
 	<rabbit:admin connection-factory="connectionFactory" />
 
 	<rabbit:queue name="traceInQueue" />

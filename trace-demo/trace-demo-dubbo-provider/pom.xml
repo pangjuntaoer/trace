@@ -40,11 +40,6 @@
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>redis.clients</groupId>
-			<artifactId>jedis</artifactId>
-			<version>${jedis.version}</version><!--$NO-MVN-MAN-VER$ -->
-		</dependency>
-		<dependency>
 			<groupId>com.zxq.iov.cloud</groupId>
 			<artifactId>trace-api</artifactId>
 			<version>${trace-api.version}</version>
@@ -53,6 +48,11 @@
 			<groupId>com.zxq.iov.cloud</groupId>
 			<artifactId>trace-redis</artifactId>
 			<version>${trace-redis.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+			<version>${jedis.version}</version><!--$NO-MVN-MAN-VER$ -->
 		</dependency>
 		<dependency>
 			<groupId>com.zxq.iov.cloud</groupId>

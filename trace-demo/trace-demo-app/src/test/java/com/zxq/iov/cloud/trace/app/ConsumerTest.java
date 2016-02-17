@@ -22,15 +22,15 @@ import com.zxq.iov.cloud.trace.dto.OTAMessageDemo;
 
 public class ConsumerTest {
 
-	@Test
-	public void testRedis() {
-		String name="aaaa";
-//		String url = "http://localhost:8080/trace-demo-app/hello/" + name;
-		String url = "http://10.25.23.102:8080/trace-demo-app/hello/" + name;
-		String result = doGet(url, "GET");
-		String hello = getObjFromJson(result, "data", String.class);
-		Assert.assertEquals("Hello " + name, hello);
-	}
+//	@Test
+//	public void testRedis() {
+//		String name="aaaa";
+////		String url = "http://localhost:8080/trace-demo-app/hello/" + name;
+//		String url = "http://10.25.23.102:8080/trace-demo-app/hello/" + name;
+//		String result = doGet(url, "GET");
+//		String hello = getObjFromJson(result, "data", String.class);
+//		Assert.assertEquals("Hello " + name, hello);
+//	}
 	
 //	@Test
 //	public void testdb() {
@@ -57,6 +57,14 @@ public class ConsumerTest {
 //		String result = doPost(url, "POST");
 //		Assert.assertEquals(result, "success");
 //	}
+	
+	@Test
+	public void testMq2() throws IOException {
+//		String url = "http://localhost:8080/trace-demo-app/message/send2";
+		String url = "http://10.25.23.102:8080/trace-demo-app/message/send2";
+		String result = doPost(url, "POST");
+		Assert.assertEquals(result, "success");
+	}
 
 	private static ObjectMapper mapper = new ObjectMapper();
 

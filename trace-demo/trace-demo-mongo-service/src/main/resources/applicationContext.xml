@@ -28,7 +28,7 @@
 
 	<aop:config>
 		<aop:pointcut id="pc-mongodb"
-			expression="execution(public* com.zxq.iov.cloud..mongo..*Repository.*(..))" />
+			expression="execution(public* com.zxq.iov.cloud..mongo..repositories..*Repository.*(..))" />
 		<aop:aspect id="traceMongodbAop" ref="traceMongodbAop">
 			<aop:around method="around" pointcut-ref="pc-mongodb" />
 		</aop:aspect>

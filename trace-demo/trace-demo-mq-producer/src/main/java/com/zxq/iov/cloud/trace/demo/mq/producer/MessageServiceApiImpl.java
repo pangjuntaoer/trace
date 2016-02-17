@@ -15,4 +15,9 @@ public class MessageServiceApiImpl implements MessageServiceApi {
 		amqpTemplate.convertAndSend(message);
 	}
 
+	@Override
+	public void send(String routingKey, Object message) {
+		amqpTemplate.convertAndSend(routingKey, message);
+	}
+
 }

@@ -11,5 +11,5 @@ http://www.springframework.org/schema/data/mongo http://www.springframework.org/
 		<constructor-arg name="databaseName" value="${dbname}" /> -->
 		<constructor-arg name="mongoDbFactory" ref="mongoDbFactory"/>
 	</bean>
-	<mongo:repositories base-package="com.zxq.iov.cloud.trace.demo.mongo.service.repositories" />
+	<mongo:repositories base-package="com.zxq.iov.cloud.trace.demo.mongo.repositories" />
 </beans>

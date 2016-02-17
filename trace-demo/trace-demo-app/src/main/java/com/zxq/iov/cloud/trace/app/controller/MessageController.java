@@ -35,5 +35,14 @@ public class MessageController {
 		messageServiceApi.send(message);
 		return "success";
 	}
+	
+	@RequestMapping(value="/send2", method=RequestMethod.POST)
+	@ResponseBody
+	public String sendMessage2(HttpServletRequest request) throws JsonParseException, JsonMappingException, IOException {
+		String messages = request.getParameter("message");
+		OTAMessageDemo message = new ObjectMapper().readValue(messages, OTAMessageDemo.class);
+		messageServiceApi.send("trace.in.mq", message);
+		return "success";
+	}
 
 }
