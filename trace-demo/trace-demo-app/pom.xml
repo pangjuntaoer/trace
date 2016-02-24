@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>com.zxq.iov.cloud</groupId>
 		<artifactId>trace-demo</artifactId>
-		<version>3</version>
+		<version>3.0.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>trace-demo-app</artifactId>
 	<packaging>war</packaging>
@@ -14,7 +14,7 @@
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<trace-api.version>3</trace-api.version>
+		<trace-api.version>3.0.0-SNAPSHOT</trace-api.version>
 		<trace-demo-dubbo-iface.version>3</trace-demo-dubbo-iface.version>
 		<trace-demo-mongo-iface.version>3</trace-demo-mongo-iface.version>
 		<trace-demo-mq-iface.version>3</trace-demo-mq-iface.version>

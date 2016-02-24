@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>com.zxq.iov.cloud</groupId>
 		<artifactId>trace</artifactId>
-		<version>3</version>
+		<version>3.0.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>trace-api</artifactId>
 	<name>trace-api</name>

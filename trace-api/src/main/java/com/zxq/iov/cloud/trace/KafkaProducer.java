@@ -2,6 +2,7 @@ package com.zxq.iov.cloud.trace;
 
 import java.io.InputStream;
 import java.util.Properties;
+import java.util.UUID;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -45,6 +46,10 @@ public class KafkaProducer {
 	public void send(Span span) throws JsonProcessingException {
 		String value = new ObjectMapper().writeValueAsString(span);
 		producer.send(new KeyedMessage<String, String>(topic, span.getTraceId(), value));
+	}
+	
+	public void send(String message) {
+		producer.send(new KeyedMessage<String, String>(topic, UUID.randomUUID().toString().substring(0, 10), message));
 	}
 
 }

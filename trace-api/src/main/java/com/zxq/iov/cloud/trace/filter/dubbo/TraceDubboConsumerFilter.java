@@ -12,6 +12,7 @@ import com.zxq.iov.cloud.trace.Annotation;
 import com.zxq.iov.cloud.trace.AnnotationType;
 import com.zxq.iov.cloud.trace.BinaryAnnotation;
 import com.zxq.iov.cloud.trace.Span;
+import com.zxq.iov.cloud.trace.TraceConstant;
 import com.zxq.iov.cloud.trace.TraceContext;
 import com.zxq.iov.cloud.trace.Tracer;
 
@@ -37,20 +38,20 @@ public class TraceDubboConsumerFilter implements Filter {
 		}
 		try {
 			RpcInvocation invocation1 = (RpcInvocation) invocation;
-			invocation1.setAttachment("traceId", context.getTraceId());
-			invocation1.setAttachment("isSample", String.valueOf(isSample));
-			invocation1.setAttachment("parentSpanId", context.getCurrentSpanId());
+			invocation1.setAttachment(TraceConstant.TRACE_ID, context.getTraceId());
+			invocation1.setAttachment(TraceConstant.IS_SAMPLE, String.valueOf(isSample));
+			invocation1.setAttachment(TraceConstant.PARENT_SPAN_ID, context.getCurrentSpanId());
 			Result result = invoker.invoke(invocation);
 			if (isSample && result.getException() != null) {
-				span.addBinaryAnnotation(
-						new BinaryAnnotation("exception", System.currentTimeMillis(), context.getIp(), null));
+				span.addBinaryAnnotation(new BinaryAnnotation(TraceConstant.EXCEPTION, System.currentTimeMillis(),
+						context.getIp(), null));
 			}
 			return result;
 		} finally {
 			if (isSample) {
 				span.setSignature(invoker.getUrl().toFullString());
-				span.addAnnotation(new Annotation(AnnotationType.CR.name(), System.currentTimeMillis(),
-						context.getIp(), null));
+				span.addAnnotation(
+						new Annotation(AnnotationType.CR.name(), System.currentTimeMillis(), context.getIp(), null));
 				tracer.sendSpan(span);
 			}
 		}

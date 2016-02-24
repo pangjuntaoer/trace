@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.zxq.iov.cloud</groupId>
@@ -8,7 +9,6 @@
 		<relativePath>../app/pom.xml</relativePath>
 	</parent>
 	<artifactId>trace</artifactId>
-	<version>3</version>
 	<packaging>pom</packaging>
 	<properties>
 		<maven.test.skip>false</maven.test.skip>
@@ -49,7 +49,7 @@
 		<module>trace-tbox</module>
 		<module>trace-mq</module>
 		<module>trace-redis</module>
-    <module>trace-mongodb</module>
-    <module>trace-db</module>
-  </modules>
+		<module>trace-mongodb</module>
+		<module>trace-db</module>
+	</modules>
 </project>

@@ -5,14 +5,14 @@
   <parent>
     <groupId>com.zxq.iov.cloud</groupId>
     <artifactId>trace</artifactId>
-    <version>3</version>
+    <version>3.0.0-SNAPSHOT</version>
   </parent>
   <artifactId>trace-redis</artifactId>
   <name>trace-redis</name>
   <url>http://maven.apache.org</url>
   <properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<trace-api.version>3</trace-api.version>
+		<trace-api.version>3.0.0-SNAPSHOT</trace-api.version>
 	</properties>
 	<dependencies>
 		<dependency>

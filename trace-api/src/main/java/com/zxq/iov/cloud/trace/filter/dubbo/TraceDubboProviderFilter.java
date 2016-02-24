@@ -13,6 +13,7 @@ import com.zxq.iov.cloud.trace.Annotation;
 import com.zxq.iov.cloud.trace.AnnotationType;
 import com.zxq.iov.cloud.trace.BinaryAnnotation;
 import com.zxq.iov.cloud.trace.Span;
+import com.zxq.iov.cloud.trace.TraceConstant;
 import com.zxq.iov.cloud.trace.TraceContext;
 import com.zxq.iov.cloud.trace.Tracer;
 
@@ -26,9 +27,9 @@ public class TraceDubboProviderFilter implements Filter {
 		Span span = null;
 		RpcContext rc = RpcContext.getContext();
 
-		boolean isSample = Boolean.valueOf(rc.getAttachment("isSample"));
-		String traceId = rc.getAttachment("traceId");
-		String parentSpanId = rc.getAttachment("parentSpanId");
+		boolean isSample = Boolean.valueOf(rc.getAttachment(TraceConstant.IS_SAMPLE));
+		String traceId = rc.getAttachment(TraceConstant.TRACE_ID);
+		String parentSpanId = rc.getAttachment(TraceConstant.PARENT_SPAN_ID);
 		TraceContext context = tracer.getTraceContext();
 		if (context == null) {
 			context = new TraceContext();
@@ -49,8 +50,8 @@ public class TraceDubboProviderFilter implements Filter {
 		try {
 			Result result = invoker.invoke(invocation);
 			if (isSample && result.getException() != null) {
-				span.addBinaryAnnotation(
-						new BinaryAnnotation("exception", System.currentTimeMillis(), IpUtil.getNetworkIp(), null));
+				span.addBinaryAnnotation(new BinaryAnnotation(TraceConstant.EXCEPTION, System.currentTimeMillis(),
+						IpUtil.getNetworkIp(), null));
 			}
 			return result;
 		} finally {
