@@ -23,6 +23,10 @@ public class TraceRedisAop {
 		Tracer tracer = Tracer.getTracer();
 		TraceContext context = tracer.getTraceContext();
 
+		if (context == null) {
+			return point.proceed();
+		}
+		
 		boolean isSample = context.getIsSample();
 
 		Span span = null;

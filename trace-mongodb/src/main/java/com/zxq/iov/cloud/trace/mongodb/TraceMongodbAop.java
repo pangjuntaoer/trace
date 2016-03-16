@@ -19,10 +19,12 @@ public class TraceMongodbAop {
 //
 //	@Around(value = PC_MONGODB)
 	public Object around(ProceedingJoinPoint point) throws Throwable {
-		Object result = null;
 		Tracer tracer = Tracer.getTracer();
 		TraceContext context = tracer.getTraceContext();
 
+		if (context == null) {
+			return point.proceed();
+		}
 		boolean isSample = context.getIsSample();
 
 		Span span = null;
@@ -35,7 +37,7 @@ public class TraceMongodbAop {
 					new Annotation(AnnotationType.CS.name(), System.currentTimeMillis(), context.getIp(), parasMap));
 		}
 		try {
-			result = point.proceed();
+			return point.proceed();
 		} finally {
 			if (isSample) {
 				span.addAnnotation(new Annotation(AnnotationType.CR.name(), System.currentTimeMillis(),
@@ -43,7 +45,6 @@ public class TraceMongodbAop {
 				tracer.sendSpan(span);
 			}
 		}
-		return result;
 	}
 
 }

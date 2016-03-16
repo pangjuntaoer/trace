@@ -23,6 +23,11 @@ public class TraceMqSendAop {
 		Object[] args = point.getArgs();
 		Tracer tracer = Tracer.getTracer();
 		TraceContext context = tracer.getTraceContext();
+		
+		if (context == null) {
+			return point.proceed();
+		}
+		
 		Boolean isSample = context.getIsSample();
 		String traceId = context.getTraceId();
 		Span span = null;
