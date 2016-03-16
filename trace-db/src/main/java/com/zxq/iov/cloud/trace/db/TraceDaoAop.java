@@ -19,7 +19,6 @@ public class TraceDaoAop {
 //
 //	@Around(value = PC_DB)
 	public Object around(ProceedingJoinPoint point) throws Throwable {
-		Object result = null;
 		Tracer tracer = Tracer.getTracer();
 		TraceContext context = tracer.getTraceContext();
 
@@ -39,7 +38,7 @@ public class TraceDaoAop {
 					new Annotation(AnnotationType.CS.name(), System.currentTimeMillis(), context.getIp(), parasMap));
 		}
 		try {
-			result = point.proceed();
+			return point.proceed();
 		} finally {
 			if (isSample) {
 				span.addAnnotation(new Annotation(AnnotationType.CR.name(), System.currentTimeMillis(),
@@ -47,7 +46,6 @@ public class TraceDaoAop {
 				tracer.sendSpan(span);
 			}
 		}
-		return result;
 	}
 	
 }
