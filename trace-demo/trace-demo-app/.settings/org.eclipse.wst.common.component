@@ -4,6 +4,15 @@
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+        <dependent-module archiveName="trace-demo-dubbo-iface-3.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/trace-demo-dubbo-iface/trace-demo-dubbo-iface">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="trace-demo-mongo-iface-3.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/trace-demo-mongo-iface/trace-demo-mongo-iface">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="trace-demo-mq-iface-3.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/trace-demo-mq-iface/trace-demo-mq-iface">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <dependent-module archiveName="trace-api-3.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/trace-api/trace-api">
             <dependency-type>uses</dependency-type>
         </dependent-module>

@@ -14,7 +14,7 @@
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<trace-demo-dubbo-iface.version>3</trace-demo-dubbo-iface.version>
+		<trace-demo-dubbo-iface.version>3.0.0-SNAPSHOT</trace-demo-dubbo-iface.version>
 		<trace-api.version>3.0.0-SNAPSHOT</trace-api.version>
 		<jedis.version>2.8.0</jedis.version>
 		<trace-redis.version>3.0.0-SNAPSHOT</trace-redis.version>
@@ -29,7 +29,7 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<version>4.2.19.Final</version><!--$NO-MVN-MAN-VER$-->
+			<version>4.3.5.Final</version><!--$NO-MVN-MAN-VER$-->
 		</dependency>
 		<dependency>
 			<groupId>commons-dbcp</groupId>

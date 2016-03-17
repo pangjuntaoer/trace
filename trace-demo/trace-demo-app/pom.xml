@@ -15,9 +15,9 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<trace-api.version>3.0.0-SNAPSHOT</trace-api.version>
-		<trace-demo-dubbo-iface.version>3</trace-demo-dubbo-iface.version>
-		<trace-demo-mongo-iface.version>3</trace-demo-mongo-iface.version>
-		<trace-demo-mq-iface.version>3</trace-demo-mq-iface.version>
+		<trace-demo-dubbo-iface.version>3.0.0-SNAPSHOT</trace-demo-dubbo-iface.version>
+		<trace-demo-mongo-iface.version>3.0.0-SNAPSHOT</trace-demo-mongo-iface.version>
+		<trace-demo-mq-iface.version>3.0.0-SNAPSHOT</trace-demo-mq-iface.version>
 		<spring-data-mongodb.version>1.8.2.RELEASE</spring-data-mongodb.version>
 	</properties>
 	<dependencies>

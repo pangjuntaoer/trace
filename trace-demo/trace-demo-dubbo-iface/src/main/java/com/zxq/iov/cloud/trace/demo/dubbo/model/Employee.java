@@ -7,11 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 @SuppressWarnings("serial")
-@Entity
-@Table(name = "employee")
+@Entity(name = "employee")
 public class Employee extends BaseEntity implements Serializable {
 	
 	@Id
