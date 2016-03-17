@@ -24,6 +24,9 @@ public class TraceDubboConsumerFilter implements Filter {
 	// 调用过程拦截
 	public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
 		TraceContext context = tracer.getTraceContext();
+		if (context == null) {
+			return invoker.invoke(invocation);
+		}
 		boolean isSample = context.getIsSample();
 
 		Span span = null;

@@ -24,7 +24,6 @@ public class TraceDubboProviderFilter implements Filter {
 
 	// 调用过程拦截
 	public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
-		Span span = null;
 		RpcContext rc = RpcContext.getContext();
 
 		boolean isSample = Boolean.valueOf(rc.getAttachment(TraceConstant.IS_SAMPLE));
@@ -40,6 +39,7 @@ public class TraceDubboProviderFilter implements Filter {
 			tracer.setTraceContext(context);
 		}
 
+		Span span = null;
 		if (isSample) {
 			String currentSpanId = tracer.genCurrentSpanId(parentSpanId);
 			span = new Span(traceId, currentSpanId);
