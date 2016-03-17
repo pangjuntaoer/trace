@@ -29,7 +29,7 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<version>4.3.5.Final</version><!--$NO-MVN-MAN-VER$-->
+			<version>4.2.19.Final</version><!--$NO-MVN-MAN-VER$-->
 		</dependency>
 		<dependency>
 			<groupId>commons-dbcp</groupId>

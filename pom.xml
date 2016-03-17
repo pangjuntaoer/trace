@@ -6,7 +6,7 @@
 		<groupId>com.zxq.iov.cloud</groupId>
 		<artifactId>cloud</artifactId>
 		<version>3.0.0-SNAPSHOT</version>
-		<relativePath>../app/pom.xml</relativePath>
+		<relativePath>../cloud/pom.xml</relativePath>
 	</parent>
 	<artifactId>trace</artifactId>
 	<packaging>pom</packaging>
@@ -15,7 +15,6 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<javassist.version>3.20.0-GA</javassist.version>
 		<zkclient.version>0.1</zkclient.version>
-		<dubbo-iface.version>1.0</dubbo-iface.version>
 		<jdk.version>1.7</jdk.version>
 	</properties>
 	<dependencies>

@@ -2,7 +2,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
-	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:util="http://www.springframework.org/schema/util" 
 	xsi:schemaLocation="
     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
@@ -58,8 +58,7 @@
 				<!-- <prop key="hibernate.default_schema">${hibernate.default_schema}</prop> -->
 				<prop key="hibernate.hbm2ddl.auto">none</prop>
 				<prop key="jdbc.use_scrollable_resultset">false</prop>
-				<prop key="hibernate.current_session_context_class">org.springframework.orm.hibernate4.SpringSessionContext
-				</prop>
+				<prop key="hibernate.current_session_context_class">org.springframework.orm.hibernate4.SpringSessionContext</prop>
 				<prop key="hibernate.temp.use_jdbc_metadata_defaults">false</prop>
 			</props>
 		</property>
@@ -72,12 +71,13 @@
 		</property>
 	</bean>
 
-	<tx:annotation-driven transaction-manager="transactionManager" />
+	<tx:annotation-driven transaction-manager="transactionManager" /> 
 
 	<bean id="traceRedisAop" class="com.zxq.iov.cloud.trace.redis.aop.TraceRedisAop" />
 	<bean id="traceDaoAop" class="com.zxq.iov.cloud.trace.db.TraceDaoAop" />
-
+	
 	<aop:config>
+		
 		<aop:pointcut id="pc-redis"
 			expression="execution(public* com.saicmotor.telematics.framework.core.redis.JedisClusterUtils.*(..))" />
 		<aop:pointcut id="pc-db"
