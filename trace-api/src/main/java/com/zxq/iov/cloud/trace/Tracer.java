@@ -45,15 +45,15 @@ public class Tracer {
 	}
 
 	public synchronized boolean isSample() {
-		 long current = System.currentTimeMillis();
-		 long period = current - pre;
-		 pre = current;
-		 requestCounts++;
-		 if ((period >= 1000) || (period < 100 && requestCounts % 20 == 0)
-		 || (period >= 100 && period < 1000 && requestCounts % 10 == 0)) {
-		 return true;
-		 }
-		 return false;
+		long current = System.currentTimeMillis();
+		long period = current - pre;
+		pre = current;
+		requestCounts++;
+		if ((period >= 1000) || (period < 100 && requestCounts % 20 == 0)
+				|| (period >= 100 && period < 1000 && requestCounts % 10 == 0)) {
+			return true;
+		}
+		return false;
 	}
 
 	private class TransferTask extends Thread {
