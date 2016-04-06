@@ -36,25 +36,24 @@ public class Tracer {
 		} else if (currentSpanId == parentSpanId) {
 			currentSpanId = parentSpanId + ".1";
 		} else {
-			int len = currentSpanId.length();
-			int id = Integer.parseInt(currentSpanId.substring(currentSpanId.lastIndexOf(".") + 1));
-			currentSpanId = currentSpanId.substring(0, len - 1) + (id + 1);
+			int len = currentSpanId.lastIndexOf(".");
+			int id = Integer.parseInt(currentSpanId.substring(len + 1));
+			currentSpanId = currentSpanId.substring(0, len + 1) + (id + 1);
 		}
 		getTraceContext().setCurrentSpanId(currentSpanId);
 		return currentSpanId;
 	}
 
 	public synchronized boolean isSample() {
-		return true;
-		// long current = System.currentTimeMillis();
-		// long period = current - pre;
-		// pre = current;
-		// requestCounts++;
-		// if ((period >= 1000) || (period < 100 && requestCounts % 20 == 0)
-		// || (period >= 100 && period < 1000 && requestCounts % 10 == 0)) {
-		// return true;
-		// }
-		// return false;
+		 long current = System.currentTimeMillis();
+		 long period = current - pre;
+		 pre = current;
+		 requestCounts++;
+		 if ((period >= 1000) || (period < 100 && requestCounts % 20 == 0)
+		 || (period >= 100 && period < 1000 && requestCounts % 10 == 0)) {
+		 return true;
+		 }
+		 return false;
 	}
 
 	private class TransferTask extends Thread {
