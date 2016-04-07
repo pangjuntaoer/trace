@@ -15,6 +15,7 @@ import com.zxq.iov.cloud.trace.Span;
 import com.zxq.iov.cloud.trace.TraceContext;
 import com.zxq.iov.cloud.trace.Tracer;
 import com.zxq.iov.cloud.trace.dto.MsgWrapperDto;
+import com.zxq.iov.cloud.trace.utils.ObjectTransferUtil;
 
 @Component
 @Aspect
@@ -31,7 +32,12 @@ public class TraceTboxAppAop {
 		Object[] args = point.getArgs();
 		Tracer tracer = Tracer.getTracer();
 
-		MsgWrapperDto dto = (MsgWrapperDto) args[0];
+		MsgWrapperDto dto;
+		if (args[0] instanceof MsgWrapperDto) {
+			dto = (MsgWrapperDto) args[0];
+		} else {
+			dto = ObjectTransferUtil.getObjFromJson(new String((byte[]) args[0], "utf-8"), MsgWrapperDto.class);
+		}
 
 		boolean isSample = dto.getIsSample();
 
