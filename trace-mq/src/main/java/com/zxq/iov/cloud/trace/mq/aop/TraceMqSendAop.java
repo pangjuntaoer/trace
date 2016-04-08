@@ -2,23 +2,15 @@ package com.zxq.iov.cloud.trace.mq.aop;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 
+import com.saicmotor.telematics.framework.core.trace.MQMsgDto;
 import com.zxq.iov.cloud.trace.Annotation;
 import com.zxq.iov.cloud.trace.AnnotationType;
 import com.zxq.iov.cloud.trace.Span;
 import com.zxq.iov.cloud.trace.TraceContext;
 import com.zxq.iov.cloud.trace.Tracer;
-import com.zxq.iov.cloud.trace.dto.MsgWrapperDto;
 
-//@Component
-//@Aspect
-//@Order(0)
 public class TraceMqSendAop {
-	
-//	private static final String PC_AMQP_S_1 = "execution(public* org..AmqpTemplate.convertAndSend(Object))";
-//
-//	private static final String PC_AMQP_S_2 = "execution(public* org..AmqpTemplate.convertAndSend(String, Object))";
-//
-//	@Around(value = PC_AMQP_S_1 + " or " + PC_AMQP_S_2)
+
 	public Object around(ProceedingJoinPoint point) throws Throwable {
 		Object[] args = point.getArgs();
 		Tracer tracer = Tracer.getTracer();
@@ -40,12 +32,16 @@ public class TraceMqSendAop {
 			context.putSpan(span);
 		}
 		try {
+			MQMsgDto dto;
 			if (args != null && args.length == 1) {
-				args[0] = new MsgWrapperDto(traceId, isSample, context.getCurrentSpanId(), args[0]);
+				dto = (MQMsgDto)args[0];
 			} else {
-				args[1] = new MsgWrapperDto(traceId, isSample, context.getCurrentSpanId(), args[1]);
+				dto = (MQMsgDto)args[1];
 			}
-			return point.proceed(args);
+			dto.setTraceId(traceId);
+			dto.setSample(isSample);
+			dto.setParentSpanId(context.getCurrentSpanId());
+			return point.proceed();
 		} finally {
 			if (isSample) {
 				span.addAnnotation(

@@ -3,55 +3,50 @@ package com.zxq.iov.cloud.trace.tbox.app.aop;
 import java.util.Map;
 
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
-import org.springframework.core.annotation.Order;
-import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.core.JsonEncoding;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.saicmotor.telematics.framework.core.trace.MQMsgDto;
 import com.saicmotor.telematics.framework.core.utils.IpUtil;
+import com.saicmotor.telematics.framework.core.utils.JsonUtil;
 import com.zxq.iov.cloud.trace.Annotation;
 import com.zxq.iov.cloud.trace.AnnotationType;
 import com.zxq.iov.cloud.trace.Span;
 import com.zxq.iov.cloud.trace.TraceContext;
 import com.zxq.iov.cloud.trace.Tracer;
-import com.zxq.iov.cloud.trace.dto.MsgWrapperDto;
-import com.zxq.iov.cloud.trace.utils.ObjectTransferUtil;
 
-@Component
-@Aspect
-@Order(0)
 public class TraceTboxAppAop {
 
-	private static final String PC_AMQP_R = "execution(public* com.zxq.iov.cloud.app.tbox.GatewayEntryPoint.onMessage(com.zxq.iov.cloud.trace.dto.MsgWrapperDto))"
-			 + " or " +
-			 "execution(public* com.zxq.iov.cloud.app.tbox.ServiceEntryPoint.onMessage(com.zxq.iov.cloud.trace.dto.MsgWrapperDto))";
-
-	@Around(value = PC_AMQP_R)
+	private static ObjectMapper mapper = new ObjectMapper();
+	
 	public Object aroundTboxApp(ProceedingJoinPoint point) throws Throwable {
 		Object result = null;
 		Object[] args = point.getArgs();
 		Tracer tracer = Tracer.getTracer();
 
-		MsgWrapperDto dto;
-		if (args[0] instanceof MsgWrapperDto) {
-			dto = (MsgWrapperDto) args[0];
+		String json = null;
+		if (args[0] instanceof MQMsgDto) {
+			json = mapper.writeValueAsString(args[0]);
 		} else {
-			dto = ObjectTransferUtil.getObjFromJson(new String((byte[]) args[0], "utf-8"), MsgWrapperDto.class);
+			json = new String((byte[]) args[0], JsonEncoding.UTF8.name());
 		}
+		
+		String traceId = JsonUtil.getObjFromJson(json,"traceId", String.class);
 
-		boolean isSample = dto.getIsSample();
+		boolean isSample = JsonUtil.getObjFromJson(json,"sample", Boolean.class);
+		String parentSpanId = JsonUtil.getObjFromJson(json,"parentSpanId", String.class);
 
 		TraceContext context = new TraceContext();
-		context.setTraceId(dto.getTraceId());
+		context.setTraceId(traceId);
 		context.setIsSample(isSample);
-		context.setParentSpanId(dto.getParentSpanId());
+		context.setParentSpanId(parentSpanId);
 		context.setIp(IpUtil.getNetworkIp());
 		tracer.setTraceContext(context);
 
 		Span rootSpan = null;
 		Map<String, String[]> parasMap = null;
 		if (isSample) {
-			rootSpan = new Span(context.getTraceId(),tracer.genCurrentSpanId(dto.getParentSpanId()));
+			rootSpan = new Span(context.getTraceId(),tracer.genCurrentSpanId(parentSpanId));
 			rootSpan.setSignature(point.getSignature().getDeclaringTypeName() + "." + point.getSignature().getName());
 			rootSpan.addAnnotation(
 					new Annotation(AnnotationType.SR.name(), System.currentTimeMillis(), context.getIp(), parasMap));

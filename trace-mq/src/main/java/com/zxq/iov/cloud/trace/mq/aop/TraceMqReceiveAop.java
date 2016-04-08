@@ -4,35 +4,42 @@ import java.util.Map;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 
+import com.fasterxml.jackson.core.JsonEncoding;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.saicmotor.telematics.framework.core.trace.MQMsgDto;
 import com.saicmotor.telematics.framework.core.utils.IpUtil;
+import com.saicmotor.telematics.framework.core.utils.JsonUtil;
 import com.zxq.iov.cloud.trace.Annotation;
 import com.zxq.iov.cloud.trace.AnnotationType;
 import com.zxq.iov.cloud.trace.Span;
 import com.zxq.iov.cloud.trace.TraceContext;
 import com.zxq.iov.cloud.trace.Tracer;
-import com.zxq.iov.cloud.trace.dto.MsgWrapperDto;
-import com.zxq.iov.cloud.trace.utils.ObjectTransferUtil;
 
 public class TraceMqReceiveAop {
+	
+	private static ObjectMapper mapper = new ObjectMapper();
 
 	public Object around(ProceedingJoinPoint point) throws Throwable {
 		Object result = null;
 		Object[] args = point.getArgs();
 		Tracer tracer = Tracer.getTracer();
 
-		MsgWrapperDto dto;
-		if (args[0] instanceof MsgWrapperDto) {
-			dto = (MsgWrapperDto) args[0];
+		String json = null;
+		if (args[0] instanceof MQMsgDto) {
+			json = mapper.writeValueAsString(args[0]);
 		} else {
-			dto = ObjectTransferUtil.getObjFromJson(new String((byte[]) args[0], "utf-8"), MsgWrapperDto.class);
+			json = new String((byte[]) args[0], JsonEncoding.UTF8.name());
 		}
+		
+		String traceId = JsonUtil.getObjFromJson(json,"traceId", String.class);
 
-		boolean isSample = dto.getIsSample();
-
+		boolean isSample = JsonUtil.getObjFromJson(json,"sample", Boolean.class);
+		String parentSpanId = JsonUtil.getObjFromJson(json,"parentSpanId", String.class);
+		
 		TraceContext context = new TraceContext();
-		context.setTraceId(dto.getTraceId());
+		context.setTraceId(traceId);
 		context.setIsSample(isSample);
-		context.setParentSpanId(dto.getParentSpanId() + ".1");
+		context.setParentSpanId(parentSpanId + ".1");
 		context.setIp(IpUtil.getNetworkIp());
 		tracer.setTraceContext(context);
 

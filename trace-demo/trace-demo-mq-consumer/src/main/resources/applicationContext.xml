@@ -25,7 +25,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 
 	<aop:config>
 		<aop:pointcut id="pc-mq-receive"
-			expression="execution(public* com.zxq.iov.cloud..*MessageListener.onMessage(byte[]))" />
+			expression="execution(public* com.zxq.iov.cloud..*MessageListener.onMessage(..))" />
 		<aop:aspect id="traceMqReceiveAop" ref="traceMqReceiveAop" order="-2147483648">
 			<aop:around method="around" pointcut-ref="pc-mq-receive" />
 		</aop:aspect>

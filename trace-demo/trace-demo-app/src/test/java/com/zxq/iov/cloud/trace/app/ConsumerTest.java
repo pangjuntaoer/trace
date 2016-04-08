@@ -32,14 +32,14 @@ public class ConsumerTest {
 //		Assert.assertEquals("Hello " + name, hello);
 //	}
 	
-	@Test
-	public void testdb() {
-//		String url = "http://localhost:8080/trace-demo-app/hello/aaa";
-		String url = "http://10.25.23.102:8080/trace-demo-app/employee/2";
-		String result = doGet(url, "GET");
-		Employee employee = getObjFromJson(result, "data", Employee.class);
-		Assert.assertEquals("Jack", employee.getName());
-	}
+//	@Test
+//	public void testdb() {
+////		String url = "http://localhost:8080/trace-demo-app/hello/aaa";
+//		String url = "http://10.25.23.102:8080/trace-demo-app/employee/2";
+//		String result = doGet(url, "GET");
+//		Employee employee = getObjFromJson(result, "data", Employee.class);
+//		Assert.assertEquals("Jack", employee.getName());
+//	}
 	
 //	@Test
 //	public void testMongodb() {
@@ -50,13 +50,13 @@ public class ConsumerTest {
 //		Assert.assertEquals("aaa", user.getName());
 //	}
 	
-//	@Test
-//	public void testMq() throws IOException {
-////		String url = "http://localhost:8080/trace-demo-app/message/send";
+	@Test
+	public void testMq() throws IOException {
+		String url = "http://localhost:8080/trace-demo-app/message/send";
 //		String url = "http://10.25.23.102:8080/trace-demo-app/message/send";
-//		String result = doPost(url, "POST");
-//		Assert.assertEquals(result, "success");
-//	}
+		String result = doPost(url, "POST");
+		Assert.assertEquals(result, "success");
+	}
 	
 //	@Test
 //	public void testMq2() throws IOException {
