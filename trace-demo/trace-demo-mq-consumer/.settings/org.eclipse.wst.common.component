@@ -13,6 +13,9 @@
         <dependent-module archiveName="trace-mq-3.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/trace-mq/trace-mq">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="trace-demo-mq-api.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/trace-demo-mq-api/trace-demo-mq-api">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="trace-demo-mq-consumer"/>
         <property name="java-output-path" value="/trace-demo-mq-consumer/target/classes"/>
     </wb-module>

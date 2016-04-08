@@ -17,8 +17,7 @@ import com.fasterxml.jackson.core.JsonEncoding;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.zxq.iov.cloud.trace.demo.dubbo.model.Employee;
-import com.zxq.iov.cloud.trace.dto.OTAMessageDemo;
+import com.zxq.iov.cloud.trace.demo.mq.dto.OTAMessageDemo;
 
 public class ConsumerTest {
 

@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.zxq.iov.cloud.trace.demo.mq.dto.OTAMessageDemo;
 import com.zxq.iov.cloud.trace.demo.mq.iface.MessageServiceApi;
-import com.zxq.iov.cloud.trace.dto.OTAMessageDemo;
 
 @Controller
 @RequestMapping("/message")

@@ -37,5 +37,6 @@
 		<module>trace-demo-mq-consumer</module>
 		<module>trace-demo-mongo-iface</module>
 		<module>trace-demo-mongo-service</module>
+		<module>trace-demo-mq-api</module>
 	</modules>
 </project>

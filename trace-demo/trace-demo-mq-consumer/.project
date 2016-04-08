@@ -3,6 +3,7 @@
 	<name>trace-demo-mq-consumer</name>
 	<comment></comment>
 	<projects>
+		<project>trace-demo-mq-api</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

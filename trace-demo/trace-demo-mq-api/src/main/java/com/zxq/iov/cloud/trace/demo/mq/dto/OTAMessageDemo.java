@@ -1,4 +1,4 @@
-package com.zxq.iov.cloud.trace.dto;
+package com.zxq.iov.cloud.trace.demo.mq.dto;
 
 import com.saicmotor.telematics.framework.core.trace.MQMsgDto;
 

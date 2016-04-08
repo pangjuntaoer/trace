@@ -4,7 +4,7 @@ import java.io.UnsupportedEncodingException;
 
 import com.fasterxml.jackson.core.JsonEncoding;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.zxq.iov.cloud.trace.dto.OTAMessageDemo;
+import com.zxq.iov.cloud.trace.demo.mq.dto.OTAMessageDemo;
 
 public class ConsumerMessageListener {
 	
