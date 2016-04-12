@@ -10,17 +10,15 @@
 	<packaging>pom</packaging>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<trace-api.version>3.0.0-SNAPSHOT</trace-api.version>
 	</properties>
 	<dependencies>
-		<dependency>
+<!-- 		<dependency>
 			<groupId>com.saicmotor.telematics.framework.core</groupId>
 			<artifactId>core-dao</artifactId>
-		</dependency>
+		</dependency> -->
 		<dependency>
 			<groupId>com.zxq.iov.cloud</groupId>
 			<artifactId>trace-api</artifactId>
-			<version>${trace-api.version}</version>
 		</dependency>
 	</dependencies>
 	<modules>

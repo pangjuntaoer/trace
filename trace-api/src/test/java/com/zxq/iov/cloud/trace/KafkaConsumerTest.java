@@ -56,8 +56,9 @@ public class KafkaConsumerTest {
 				keyDecoder, valueDecoder);
 		KafkaStream<String, String> stream = consumerMap.get(topic).get(0);
 		ConsumerIterator<String, String> it = stream.iterator();
+		long cnt = 0;
 		while (it.hasNext()) {
-			System.out.println("recived messages: " + it.next().message());
+			System.out.println("recived " + ++cnt + " messages: " + it.next().message());
 		}
 	}
 

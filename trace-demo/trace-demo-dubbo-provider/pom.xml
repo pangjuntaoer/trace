@@ -15,10 +15,6 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<trace-demo-dubbo-iface.version>3.0.0-SNAPSHOT</trace-demo-dubbo-iface.version>
-		<trace-api.version>3.0.0-SNAPSHOT</trace-api.version>
-		<jedis.version>2.8.0</jedis.version>
-		<trace-redis.version>3.0.0-SNAPSHOT</trace-redis.version>
-		<trace-db.version>3.0.0-SNAPSHOT</trace-db.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -42,23 +38,19 @@
 		<dependency>
 			<groupId>com.zxq.iov.cloud</groupId>
 			<artifactId>trace-api</artifactId>
-			<version>${trace-api.version}</version>
-		</dependency>
+			</dependency>
 		<dependency>
 			<groupId>com.zxq.iov.cloud</groupId>
 			<artifactId>trace-redis</artifactId>
-			<version>${trace-redis.version}</version>
-		</dependency>
+			</dependency>
 		<dependency>
 			<groupId>redis.clients</groupId>
 			<artifactId>jedis</artifactId>
-			<version>${jedis.version}</version><!--$NO-MVN-MAN-VER$ -->
 		</dependency>
 		<dependency>
 			<groupId>com.zxq.iov.cloud</groupId>
 			<artifactId>trace-db</artifactId>
-			<version>${trace-db.version}</version>
-		</dependency>
+			</dependency>
 		<dependency>
 			<groupId>com.saicmotor.telematics.framework.core</groupId>
 			<artifactId>core-common</artifactId>

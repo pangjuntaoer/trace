@@ -13,17 +13,15 @@
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<trace-api.version>3.0.0-SNAPSHOT</trace-api.version>
 	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>com.zxq.iov.cloud</groupId>
 			<artifactId>trace-api</artifactId>
-			<version>${trace-api.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.saicmotor.telematics.framework.core</groupId>
-			<artifactId>core-dao</artifactId>
+			<artifactId>core-common</artifactId>
 		</dependency>
 	</dependencies>
 </project>

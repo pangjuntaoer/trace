@@ -15,15 +15,12 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<trace-demo-mongo-iface.version>3.0.0-SNAPSHOT</trace-demo-mongo-iface.version>
-		<trace-api.version>3.0.0-SNAPSHOT</trace-api.version>
-		<trace-mongodb.version>3.0.0-SNAPSHOT</trace-mongodb.version>
 	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>com.zxq.iov.cloud</groupId>
 			<artifactId>trace-api</artifactId>
-			<version>${trace-api.version}</version>
-		</dependency>
+			</dependency>
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-mongodb</artifactId>
@@ -31,8 +28,7 @@
 		<dependency>
 			<groupId>com.zxq.iov.cloud</groupId>
 			<artifactId>trace-mongodb</artifactId>
-			<version>${trace-mongodb.version}</version>
-		</dependency>
+			</dependency>
 		<dependency>
 			<groupId>com.zxq.iov.cloud</groupId>
 			<artifactId>trace-demo-mongo-iface</artifactId>

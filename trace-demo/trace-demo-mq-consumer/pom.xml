@@ -15,7 +15,6 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<trace-demo-mq-iface.version>3.0.0-SNAPSHOT</trace-demo-mq-iface.version>
 		<trace-demo-mq-api.version>3.0.0-SNAPSHOT</trace-demo-mq-api.version>
-		<trace-mq.version>3.0.0-SNAPSHOT</trace-mq.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -31,8 +30,7 @@
 		<dependency>
 			<groupId>com.zxq.iov.cloud</groupId>
 			<artifactId>trace-mq</artifactId>
-			<version>${trace-mq.version}</version>
-		</dependency>
+			</dependency>
 		<dependency>
 			<groupId>org.springframework.amqp</groupId>
 			<artifactId>spring-rabbit</artifactId>

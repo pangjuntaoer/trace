@@ -7,6 +7,9 @@
         <dependent-module archiveName="trace-demo-dubbo-iface-3.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/trace-demo-dubbo-iface/trace-demo-dubbo-iface">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="trace-demo-mq-api-3.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/trace-demo-mq-api/trace-demo-mq-api">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <dependent-module archiveName="trace-demo-mongo-iface-3.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/trace-demo-mongo-iface/trace-demo-mongo-iface">
             <dependency-type>uses</dependency-type>
         </dependent-module>
@@ -14,9 +17,6 @@
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="trace-api-3.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/trace-api/trace-api">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="trace-demo-mq-api.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/trace-demo-mq-api/trace-demo-mq-api">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <property name="context-root" value="trace-demo-app"/>
