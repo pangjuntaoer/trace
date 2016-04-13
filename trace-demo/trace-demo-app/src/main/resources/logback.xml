@@ -17,9 +17,9 @@
 		</encoder>
 	</appender>
 
-	<logger name="com.saicmotor.telematics" level="INFO">
+	<!-- <logger name="com.saicmotor.telematics" level="INFO">
 		<appender-ref ref="STDOUT" />
-	</logger>
+	</logger> -->
 
 	<root level="info">
 		<appender-ref ref="STDOUT" />

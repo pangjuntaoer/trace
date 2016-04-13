@@ -1,1 +1,2 @@
 traceDubboConsumerFilter=com.zxq.iov.cloud.trace.filter.dubbo.TraceDubboConsumerFilter
+traceDubboProviderFilter=com.zxq.iov.cloud.trace.filter.dubbo.TraceDubboProviderFilter

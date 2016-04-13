@@ -15,12 +15,18 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<trace-demo-mq-iface.version>3.0.0-SNAPSHOT</trace-demo-mq-iface.version>
+		<trace-demo-mq-api.version>3.0.0-SNAPSHOT</trace-demo-mq-api.version>
 	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>com.zxq.iov.cloud</groupId>
 			<artifactId>trace-demo-mq-iface</artifactId>
 			<version>${trace-demo-mq-iface.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.zxq.iov.cloud</groupId>
+			<artifactId>trace-demo-mq-api</artifactId>
+			<version>${trace-demo-mq-api.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.zxq.iov.cloud</groupId>

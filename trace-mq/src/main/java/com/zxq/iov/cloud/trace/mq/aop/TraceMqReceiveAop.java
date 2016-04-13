@@ -20,7 +20,6 @@ public class TraceMqReceiveAop {
 	private static ObjectMapper mapper = new ObjectMapper();
 
 	public Object around(ProceedingJoinPoint point) throws Throwable {
-		Object result = null;
 		Object[] args = point.getArgs();
 		Tracer tracer = Tracer.getTracer();
 
@@ -52,7 +51,7 @@ public class TraceMqReceiveAop {
 					new Annotation(AnnotationType.SR.name(), System.currentTimeMillis(), context.getIp(), parasMap));
 		}
 		try {
-			result = point.proceed();
+			return point.proceed();
 		} finally {
 			if (isSample) {
 				rootSpan.addAnnotation(new Annotation(AnnotationType.SS.name(), System.currentTimeMillis(),
@@ -61,7 +60,6 @@ public class TraceMqReceiveAop {
 			}
 			tracer.removeTraceContext();
 		}
-		return result;
 	}
 
 }

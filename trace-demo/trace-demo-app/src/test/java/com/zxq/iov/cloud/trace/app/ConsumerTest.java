@@ -7,6 +7,8 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -51,10 +53,12 @@ public class ConsumerTest {
 	
 	@Test
 	public void testMq() throws IOException {
-		String url = "http://localhost:8080/trace-demo-app/message/send";
-//		String url = "http://10.25.23.102:8080/trace-demo-app/message/send";
-		String result = doPost(url, "POST");
-		Assert.assertEquals(result, "success");
+		for (int i = 0; i < 100; i++) {
+			String url = "http://localhost:8080/trace-demo-app/message/send";
+//		    String url = "http://10.25.23.102:8080/trace-demo-app/message/send";
+			String result = doPost(url, "POST");
+			Assert.assertEquals(result, "success");
+		}
 	}
 	
 //	@Test
@@ -99,6 +103,7 @@ public class ConsumerTest {
         message.setAckRequired(true);
         message.setAid("aid");
         message.setAppData("中国".getBytes(JsonEncoding.UTF8.name()));
+        message.setEventCreationTime(new Timestamp(new Date().getTime()).getTime());
         
         String para = mapper.writeValueAsString(message);
         OutputStream outStream = conn.getOutputStream();

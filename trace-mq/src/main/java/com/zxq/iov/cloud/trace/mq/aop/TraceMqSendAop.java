@@ -15,11 +15,11 @@ public class TraceMqSendAop {
 		Object[] args = point.getArgs();
 		Tracer tracer = Tracer.getTracer();
 		TraceContext context = tracer.getTraceContext();
-		
+
 		if (context == null) {
 			return point.proceed();
 		}
-		
+
 		Boolean isSample = context.getIsSample();
 		String traceId = context.getTraceId();
 		Span span = null;
@@ -32,12 +32,7 @@ public class TraceMqSendAop {
 			context.putSpan(span);
 		}
 		try {
-			MQMsgDto dto;
-			if (args != null && args.length == 1) {
-				dto = (MQMsgDto)args[0];
-			} else {
-				dto = (MQMsgDto)args[1];
-			}
+			MQMsgDto dto = args.length == 1 ? (MQMsgDto) args[0] : (MQMsgDto) args[1];
 			dto.setTraceId(traceId);
 			dto.setSample(isSample);
 			dto.setParentSpanId(context.getCurrentSpanId());

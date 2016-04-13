@@ -37,10 +37,6 @@
 			<version>${trace-demo-mongo-iface.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>com.zxq.iov.cloud</groupId>
 			<artifactId>trace-demo-mq-iface</artifactId>
 			<version>${trace-demo-mq-iface.version}</version>
