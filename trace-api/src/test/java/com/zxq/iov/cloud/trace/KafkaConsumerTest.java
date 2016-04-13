@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import com.saicmotor.telematics.framework.core.utils.JsonUtil;
+
 import kafka.consumer.ConsumerConfig;
 import kafka.consumer.ConsumerIterator;
 import kafka.consumer.KafkaStream;
@@ -58,7 +60,8 @@ public class KafkaConsumerTest {
 		ConsumerIterator<String, String> it = stream.iterator();
 		long cnt = 0;
 		while (it.hasNext()) {
-			System.out.println("recived " + ++cnt + " messages: " + it.next().message());
+			Span span = JsonUtil.getObjFromJson(it.next().message(), Span.class);
+			System.out.println("recived " + ++cnt + " messages. appid: " +   span.getAppId() + ", signaure: " + span.getSignature());
 		}
 	}
 
