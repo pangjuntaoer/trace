@@ -12,10 +12,6 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<dependencies>
-<!-- 		<dependency>
-			<groupId>com.saicmotor.telematics.framework.core</groupId>
-			<artifactId>core-dao</artifactId>
-		</dependency> -->
 		<dependency>
 			<groupId>com.zxq.iov.cloud</groupId>
 			<artifactId>trace-api</artifactId>

@@ -18,7 +18,6 @@
 		<trace-demo-mongo-iface.version>3.0.0-SNAPSHOT</trace-demo-mongo-iface.version>
 		<trace-demo-mq-iface.version>3.0.0-SNAPSHOT</trace-demo-mq-iface.version>
 		<trace-demo-mq-api.version>3.0.0-SNAPSHOT</trace-demo-mq-api.version>
-		<spring-data-mongodb.version>1.8.2.RELEASE</spring-data-mongodb.version>
 	</properties>
 	<dependencies>
 		<dependency>

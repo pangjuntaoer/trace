@@ -1,20 +1,23 @@
 package com.zxq.iov.cloud.trace;
 
-import java.io.InputStream;
 import java.util.Properties;
 import java.util.UUID;
 
+import org.apache.kafka.clients.CommonClientConfigs;
+import org.apache.kafka.clients.producer.Producer;
+import org.apache.kafka.clients.producer.ProducerConfig;
+import org.apache.kafka.clients.producer.ProducerRecord;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import kafka.javaapi.producer.Producer;
-import kafka.producer.KeyedMessage;
-import kafka.producer.ProducerConfig;
+import com.saicmotor.telematics.framework.core.common.SpringContext;
 
 public class KafkaProducer {
 
 	private Producer<String, String> producer;
-	
+
+	private static ObjectMapper mapper = new ObjectMapper();
+
 	private String topic;
 
 	private static KafkaProducer kafkaProducer = new KafkaProducer();
@@ -24,32 +27,40 @@ public class KafkaProducer {
 	}
 
 	private KafkaProducer() {
-		Properties props = new Properties();
+		SpringContext sc = SpringContext.getInstance();
+		topic = sc.getProperty("topic");
 
-		try (InputStream is = KafkaProducer.class.getResourceAsStream("/kafka-producer-config.properties")) {
-			props.load(is);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		topic = props.getProperty("topic");
+		Properties prop = new Properties();
+
+		prop.put(CommonClientConfigs.BOOTSTRAP_SERVERS_CONFIG,
+				sc.getProperty(CommonClientConfigs.BOOTSTRAP_SERVERS_CONFIG));
 		
-		Properties properties = new Properties();
+		prop.put(ProducerConfig.ACKS_CONFIG, sc.getProperty(ProducerConfig.ACKS_CONFIG));
 		
-		properties.setProperty("metadata.broker.list", props.getProperty("metadata_broker_list"));
-		properties.setProperty("serializer.class", props.getProperty("serializer_class"));
-		properties.setProperty("key.serializer.class", props.getProperty("key_serializer_class"));
-		properties.setProperty("request.required.acks", props.getProperty("request_required_acks"));
+		prop.put(ProducerConfig.RETRIES_CONFIG, sc.getProperty(ProducerConfig.RETRIES_CONFIG));
 		
-		producer = new Producer<String, String>(new ProducerConfig(properties));
+		prop.put(ProducerConfig.BATCH_SIZE_CONFIG, sc.getProperty(ProducerConfig.BATCH_SIZE_CONFIG));
+		
+		prop.put(ProducerConfig.LINGER_MS_CONFIG, sc.getProperty(ProducerConfig.LINGER_MS_CONFIG));
+		
+		prop.put(ProducerConfig.BUFFER_MEMORY_CONFIG, sc.getProperty(ProducerConfig.BUFFER_MEMORY_CONFIG));
+		
+		prop.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG,
+				sc.getProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG));
+		
+		prop.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,
+				sc.getProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG));
+
+		producer = new org.apache.kafka.clients.producer.KafkaProducer<String, String>(prop);
 	}
 
 	public void send(Span span) throws JsonProcessingException {
-		String value = new ObjectMapper().writeValueAsString(span);
-		producer.send(new KeyedMessage<String, String>(topic, span.getTraceId(), value));
+		producer.send(new ProducerRecord<String, String>(topic, span.getTraceId(), mapper.writeValueAsString(span)));
 	}
-	
+
 	public void send(String message) {
-		producer.send(new KeyedMessage<String, String>(topic, UUID.randomUUID().toString().substring(0, 10), message));
+		producer.send(
+				new ProducerRecord<String, String>(topic, UUID.randomUUID().toString().substring(0, 10), message));
 	}
 
 }

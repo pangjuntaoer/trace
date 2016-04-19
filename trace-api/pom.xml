@@ -13,7 +13,6 @@
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<kafka_2.11.version>0.8.2.2</kafka_2.11.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -27,17 +26,6 @@
 		<dependency>
 			<groupId>redis.clients</groupId>
 			<artifactId>jedis</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.kafka</groupId>
-			<artifactId>kafka_2.11</artifactId>
-			<version>${kafka_2.11.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>com.101tec</groupId>
-					<artifactId>zkclient</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
