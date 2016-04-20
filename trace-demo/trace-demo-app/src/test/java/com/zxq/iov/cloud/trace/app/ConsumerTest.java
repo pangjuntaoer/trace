@@ -19,6 +19,7 @@ import com.fasterxml.jackson.core.JsonEncoding;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.zxq.iov.cloud.trace.demo.dubbo.model.Employee;
 import com.zxq.iov.cloud.trace.demo.mq.dto.OTAMessageDemo;
 
 public class ConsumerTest {
@@ -33,14 +34,15 @@ public class ConsumerTest {
 //		Assert.assertEquals("Hello " + name, hello);
 //	}
 	
-//	@Test
-//	public void testdb() {
-////		String url = "http://localhost:8080/trace-demo-app/hello/aaa";
+	@Test
+	public void testdb() {
+//		String url = "http://localhost:8080/trace-demo-app/hello/aaa";
 //		String url = "http://10.25.23.102:8080/trace-demo-app/employee/2";
-//		String result = doGet(url, "GET");
-//		Employee employee = getObjFromJson(result, "data", Employee.class);
-//		Assert.assertEquals("Jack", employee.getName());
-//	}
+		String url = "http://localhost:8080/trace-demo-app/employee/2";
+		String result = doGet(url, "GET");
+		Employee employee = getObjFromJson(result, "data", Employee.class);
+		Assert.assertEquals("Jack", employee.getName());
+	}
 	
 //	@Test
 //	public void testMongodb() {
@@ -51,15 +53,15 @@ public class ConsumerTest {
 //		Assert.assertEquals("aaa", user.getName());
 //	}
 	
-	@Test
-	public void testMq() throws IOException {
-		for (int i = 0; i < 100; i++) {
-			String url = "http://localhost:8080/trace-demo-app/message/send";
-//		    String url = "http://10.25.23.102:8080/trace-demo-app/message/send";
-			String result = doPost(url, "POST");
-			Assert.assertEquals(result, "success");
-		}
-	}
+//	@Test
+//	public void testMq() throws IOException {
+//		for (int i = 0; i < 100; i++) {
+//			String url = "http://localhost:8080/trace-demo-app/message/send";
+////		    String url = "http://10.25.23.102:8080/trace-demo-app/message/send";
+//			String result = doPost(url, "POST");
+//			Assert.assertEquals(result, "success");
+//		}
+//	}
 	
 //	@Test
 //	public void testMq2() throws IOException {
