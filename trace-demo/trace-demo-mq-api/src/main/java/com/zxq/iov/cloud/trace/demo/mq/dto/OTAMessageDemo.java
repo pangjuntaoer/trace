@@ -2,6 +2,12 @@ package com.zxq.iov.cloud.trace.demo.mq.dto;
 
 import com.saicmotor.telematics.framework.core.trace.MQMsgDto;
 
+/**
+ * 消息对象
+ * 
+ * @author Administrator
+ *
+ */
 @SuppressWarnings("serial")
 public class OTAMessageDemo extends MQMsgDto {
 	// 上行的OTA请求, 包括主动上行和ApplicationACK请求
