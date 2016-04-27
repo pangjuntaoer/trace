@@ -20,6 +20,7 @@ public class EmployeeController {
 	@RequestMapping("/{id}")
 	@ResponseBody
 	public SystemResponse findUserByName(@PathVariable Integer id) {
+		System.out.println("-====================call employeeController===========================-");
 		Employee employee = employeeServiceApi.findEmployeeById(id);
 		return new SystemResponse("employee", employee);
 	}

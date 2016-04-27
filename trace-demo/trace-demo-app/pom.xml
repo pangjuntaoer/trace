@@ -63,8 +63,13 @@
 							<goal>exec</goal>
 						</goals>
 						<configuration>
-							<executable>
+						<!-- for ubuntu -->
+						<!-- 	<executable>
 								deploy/deploy.sh
+							</executable> -->
+							<!-- for windows -->
+							<executable>
+								deploy/deploy.bat
 							</executable>
 						</configuration>
 					</execution>

@@ -40,7 +40,7 @@ class Deploy:
 			print('        '+l_file+' ---> '+r_file)
 			#上传
 			sftp.put(l_file,r_file)
-			return
+			break
 		t.close() 
 		
 	@staticmethod
