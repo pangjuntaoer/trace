@@ -1,8 +1,23 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-import ConfigParser,paramiko,datetime,os,sys,string,fileinput
+import ConfigParser,paramiko,datetime,os,sys,string,fileinput,socket,traceback
 
 class Deploy:
+
+    @staticmethod
+    def getFreePort():
+    	host=["localhost", '10.25.31.15']
+    	
+    	for h in host:
+            for port in range(130, 140):
+                try:
+                    s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+                    s.bind((h,port))
+                    s.close()
+                    print port, 'is free'
+                except:
+                    exstr = traceback.format_exc()
+                    print port , 'is busy'
 
 	@staticmethod
 	def upload():
@@ -65,6 +80,7 @@ class Deploy:
 		#关闭连接
 		s.close()
 
+Deploy.getFreePort()
 Deploy.upload()
 Deploy.exeScript()
 
