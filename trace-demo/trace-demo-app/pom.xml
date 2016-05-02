@@ -17,7 +17,7 @@
 		<trace-demo-mongo-iface.version>3.0.0-SNAPSHOT</trace-demo-mongo-iface.version>
 		<trace-demo-mq-iface.version>3.0.0-SNAPSHOT</trace-demo-mq-iface.version>
 		<trace-demo-mq-api.version>3.0.0-SNAPSHOT</trace-demo-mq-api.version>
-		
+
 	</properties>
 	<dependencies>
 		<dependency>
@@ -63,14 +63,17 @@
 							<goal>exec</goal>
 						</goals>
 						<configuration>
-						<!-- for ubuntu -->
-						<!-- 	<executable>
-								deploy/deploy.sh
-							</executable> -->
+							<!-- for ubuntu -->
+							<!-- <executable> deploy/deploy.sh </executable> -->
 							<!-- for windows -->
 							<executable>
-								deploy/deploy.bat
+								${basedir}/deploy/deploy.bat
 							</executable>
+							<arguments>
+								<argument>${project.build.finalName}</argument>
+								<argument>${project.version}</argument>
+								<argument>${project.build.finalName}.war</argument>
+							</arguments>
 						</configuration>
 					</execution>
 				</executions>
