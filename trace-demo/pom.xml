@@ -33,10 +33,10 @@
 		<module>trace-demo-app</module>
 		<module>trace-demo-mq-iface</module>
 		<module>trace-demo-mq-producer</module>
-		<module>trace-demo-dubbo-provider</module>
 		<module>trace-demo-mq-consumer</module>
 		<module>trace-demo-mongo-iface</module>
 		<module>trace-demo-mongo-service</module>
 		<module>trace-demo-mq-api</module>
+		<module>trace-demo-dubbo</module>
 	</modules>
 </project>

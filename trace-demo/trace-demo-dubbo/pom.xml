@@ -7,9 +7,9 @@
 		<artifactId>trace-demo</artifactId>
 		<version>3.0.0-SNAPSHOT</version>
 	</parent>
-	<artifactId>trace-demo-dubbo-provider</artifactId>
+	<artifactId>trace-demo-dubbo</artifactId>
 	<packaging>war</packaging>
-	<name>trace-demo-dubbo-provider Maven Webapp</name>
+	<name>trace-demo-dubbo Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -60,7 +60,7 @@
 		</dependency>
 	</dependencies>
 	<build>
-		<finalName>trace-demo-dubbo-provider</finalName>
+		<finalName>trace-demo-dubbo</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
