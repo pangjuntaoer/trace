@@ -4,9 +4,9 @@ import java.util.Properties;
 import java.util.UUID;
 
 import org.apache.kafka.clients.CommonClientConfigs;
-import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.common.config.SslConfigs;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -14,7 +14,7 @@ import com.saicmotor.telematics.framework.core.common.SpringContext;
 
 public class KafkaProducer {
 
-	private Producer<String, String> producer;
+	private org.apache.kafka.clients.producer.KafkaProducer<String, String> producer;
 
 	private static ObjectMapper mapper = new ObjectMapper();
 
@@ -34,24 +34,34 @@ public class KafkaProducer {
 
 		prop.put(CommonClientConfigs.BOOTSTRAP_SERVERS_CONFIG,
 				sc.getProperty(CommonClientConfigs.BOOTSTRAP_SERVERS_CONFIG));
-		
+
 		prop.put(ProducerConfig.ACKS_CONFIG, sc.getProperty(ProducerConfig.ACKS_CONFIG));
-		
+
 		prop.put(ProducerConfig.RETRIES_CONFIG, sc.getProperty(ProducerConfig.RETRIES_CONFIG));
-		
+
 		prop.put(ProducerConfig.BATCH_SIZE_CONFIG, sc.getProperty(ProducerConfig.BATCH_SIZE_CONFIG));
-		
+
 		prop.put(ProducerConfig.LINGER_MS_CONFIG, sc.getProperty(ProducerConfig.LINGER_MS_CONFIG));
-		
+
 		prop.put(ProducerConfig.BUFFER_MEMORY_CONFIG, sc.getProperty(ProducerConfig.BUFFER_MEMORY_CONFIG));
-		
+
 		prop.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG,
 				sc.getProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG));
-		
+
 		prop.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,
 				sc.getProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG));
 
-		producer = new org.apache.kafka.clients.producer.KafkaProducer<String, String>(prop);
+		String realPath = KafkaProducer.class.getResource("/").getPath().substring(1);
+		// ssl
+		// Client authentication is not required in the broker, This is a
+		// minimal configuration
+		prop.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG,
+				sc.getProperty(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG));
+		prop.put(SslConfigs.SSL_TRUSTSTORE_LOCATION_CONFIG,
+				realPath + sc.getProperty(SslConfigs.SSL_TRUSTSTORE_LOCATION_CONFIG));
+		prop.put(SslConfigs.SSL_TRUSTSTORE_PASSWORD_CONFIG, sc.getProperty(SslConfigs.SSL_TRUSTSTORE_PASSWORD_CONFIG));
+
+	    producer = new org.apache.kafka.clients.producer.KafkaProducer<String, String>(prop);
 	}
 
 	public void send(Span span) throws JsonProcessingException {

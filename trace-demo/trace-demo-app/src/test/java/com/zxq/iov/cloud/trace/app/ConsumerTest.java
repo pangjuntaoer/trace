@@ -36,8 +36,8 @@ public class ConsumerTest {
 	
 	@Test
 	public void testdb() {
-//		String url = "http://localhost:8080/trace-demo-app/hello/aaa";
-		String url = "http://10.25.23.102:8080/trace-demo-app/employee/2";
+		String url = "http://localhost:8080/trace-demo-app/hello/aaa";
+//		String url = "http://10.25.23.102:8080/trace-demo-app/employee/2";
 //		String url = "http://localhost:8080/trace-demo-app/employee/2";
 		String result = doGet(url, "GET");
 		Employee employee = getObjFromJson(result, "data", Employee.class);
