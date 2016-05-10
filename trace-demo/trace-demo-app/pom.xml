@@ -26,6 +26,10 @@
 		</dependency>
 		<dependency>
 			<groupId>com.zxq.iov.cloud</groupId>
+			<artifactId>autodeploy</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.zxq.iov.cloud</groupId>
 			<artifactId>trace-demo-mq-api</artifactId>
 			<version>${trace-demo-mq-api.version}</version>
 		</dependency>
@@ -51,23 +55,23 @@
 	<build>
 		<finalName>trace-demo-app</finalName>
 		<resources>
-            <resource>
-                <filtering>true</filtering>
-                <directory>${project.basedir}/src/main/resources</directory>
-                <excludes>
-                    <exclude>kafka.client.truststore.jks</exclude>
-                </excludes>
-            </resource>
-        </resources>
-        <testResources>
-            <testResource>
-                <filtering>true</filtering>
-                <directory>${project.basedir}\src\test\resources</directory>
-                <excludes>
-                    <exclude>kafka.client.truststore.jks</exclude>
-                </excludes>
-            </testResource>
-        </testResources>
+			<resource>
+				<filtering>true</filtering>
+				<directory>${project.basedir}/src/main/resources</directory>
+				<excludes>
+					<exclude>kafka.client.truststore.jks</exclude>
+				</excludes>
+			</resource>
+		</resources>
+		<testResources>
+			<testResource>
+				<filtering>true</filtering>
+				<directory>${project.basedir}\src\test\resources</directory>
+				<excludes>
+					<exclude>kafka.client.truststore.jks</exclude>
+				</excludes>
+			</testResource>
+		</testResources>
 		<plugins>
 			<plugin>
 				<artifactId>maven-antrun-plugin</artifactId>
@@ -91,19 +95,18 @@
 				<artifactId>exec-maven-plugin</artifactId>
 				<executions>
 					<execution>
-						<id>remote-deploy</id>
-						<phase>package</phase>
+						<id>remote-deploy-java</id>
+						<phase>deploy</phase>
 						<goals>
-							<goal>exec</goal>
+							<goal>java</goal>
 						</goals>
 						<configuration>
-							<executable>
-								${basedir}/deploy/deploy.bat
-							</executable>
+							<mainClass>com.zxq.iov.cloud.AutoDeploy</mainClass>
 							<arguments>
 								<argument>${project.build.finalName}</argument>
 								<argument>${project.version}</argument>
 								<argument>${project.build.finalName}.war</argument>
+								<argument>${project.build.directory}</argument>
 							</arguments>
 						</configuration>
 					</execution>

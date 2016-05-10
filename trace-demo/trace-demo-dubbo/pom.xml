@@ -22,6 +22,10 @@
 			<version>${trace-demo-dubbo-iface.version}</version>
 		</dependency>
 		<dependency>
+            <groupId>com.zxq.iov.cloud</groupId>
+            <artifactId>autodeploy</artifactId>
+        </dependency>
+		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
 			<version>4.2.19.Final</version><!--$NO-MVN-MAN-VER$ -->
@@ -98,28 +102,27 @@
 				</executions>
 			</plugin>
 			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>exec-maven-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>Creating a Production Build with Sencha Command</id>
-						<phase>package</phase>
-						<goals>
-							<goal>exec</goal>
-						</goals>
-						<configuration>
-							<executable>
-								${basedir}/deploy/deploy.bat
-							</executable>
-							<arguments>
-								<argument>${project.build.finalName}</argument>
-								<argument>${project.version}</argument>
-								<argument>${project.build.finalName}.war</argument>
-							</arguments>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>remote-deploy-java</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                        <configuration>
+                            <mainClass>com.zxq.iov.cloud.AutoDeploy</mainClass>
+                            <arguments>
+                                <argument>${project.build.finalName}</argument>
+                                <argument>${project.version}</argument>
+                                <argument>${project.build.finalName}.war</argument>
+                                <argument>${project.build.directory}</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
 		</plugins>
 	</build>
 </project>
