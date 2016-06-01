@@ -6,7 +6,6 @@ import java.util.UUID;
 import org.apache.kafka.clients.CommonClientConfigs;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
-import org.apache.kafka.common.config.SslConfigs;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -55,11 +54,11 @@ public class KafkaProducer {
 		// ssl
 		// Client authentication is not required in the broker, This is a
 		// minimal configuration
-		prop.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG,
-				sc.getProperty(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG));
-		prop.put(SslConfigs.SSL_TRUSTSTORE_LOCATION_CONFIG,
-				realPath + sc.getProperty(SslConfigs.SSL_TRUSTSTORE_LOCATION_CONFIG));
-		prop.put(SslConfigs.SSL_TRUSTSTORE_PASSWORD_CONFIG, sc.getProperty(SslConfigs.SSL_TRUSTSTORE_PASSWORD_CONFIG));
+//		prop.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG,
+//				sc.getProperty(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG));
+//		prop.put(SslConfigs.SSL_TRUSTSTORE_LOCATION_CONFIG,
+//				realPath + sc.getProperty(SslConfigs.SSL_TRUSTSTORE_LOCATION_CONFIG));
+//		prop.put(SslConfigs.SSL_TRUSTSTORE_PASSWORD_CONFIG, sc.getProperty(SslConfigs.SSL_TRUSTSTORE_PASSWORD_CONFIG));
 
 	    producer = new org.apache.kafka.clients.producer.KafkaProducer<String, String>(prop);
 	}

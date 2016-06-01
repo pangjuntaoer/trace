@@ -24,25 +24,25 @@ import com.zxq.iov.cloud.trace.demo.mq.dto.OTAMessageDemo;
 
 public class ConsumerTest {
 
-//	@Test
-//	public void testRedis() {
-//		String name="aaaa";
-////		String url = "http://localhost:8080/trace-demo-app/hello/" + name;
-//		String url = "http://10.25.23.102:8080/trace-demo-app/hello/" + name;
-//		String result = doGet(url, "GET");
-//		String hello = getObjFromJson(result, "data", String.class);
-//		Assert.assertEquals("Hello " + name, hello);
-//	}
-	
 	@Test
-	public void testdb() {
-		String url = "http://localhost:8080/trace-demo-app/hello/aaa";
-//		String url = "http://10.25.23.102:8080/trace-demo-app/employee/2";
-//		String url = "http://localhost:8080/trace-demo-app/employee/2";
+	public void testRedis() {
+		String name="aaaa";
+		String url = "http://localhost:8080/trace-demo-app/hello/" + name;
+//		String url = "http://10.25.23.102:8080/trace-demo-app/hello/" + name;
 		String result = doGet(url, "GET");
-		Employee employee = getObjFromJson(result, "data", Employee.class);
-		Assert.assertEquals("Jack", employee.getName());
+		String hello = getObjFromJson(result, "data", String.class);
+		Assert.assertEquals("Hello " + name, hello);
 	}
+	
+//	@Test
+//	public void testdb() {
+//		String url = "http://localhost:8080/trace-demo-app/hello/aaa";
+////		String url = "http://10.25.23.102:8080/trace-demo-app/employee/2";
+////		String url = "http://localhost:8080/trace-demo-app/employee/2";
+//		String result = doGet(url, "GET");
+//		Employee employee = getObjFromJson(result, "data", Employee.class);
+//		Assert.assertEquals("Jack", employee.getName());
+//	}
 	
 //	@Test
 //	public void testMongodb() {
@@ -104,7 +104,7 @@ public class ConsumerTest {
         message.setAckMessageCounter(1);
         message.setAckRequired(true);
         message.setAid("aid");
-        message.setAppData("中国".getBytes(JsonEncoding.UTF8.name()));
+        message.setAppData("中国人".getBytes(JsonEncoding.UTF8.name()));
         message.setEventCreationTime(new Timestamp(new Date().getTime()).getTime());
         
         String para = mapper.writeValueAsString(message);
